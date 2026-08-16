@@ -62,8 +62,9 @@
   istiyorsan graphify.
 
 ### 🆚 LLM'e tüm kodu yapıştırmak
-- **Graphify +:** 164.816 satırlık bir projeyi hiçbir bağlam penceresi taşımaz; graphify
-  ajanı **sorgu başına 6,4 KB** ile doğru yere yönlendirir (bkz. `docs/02-gercek-etki.md`).
+- **Graphify +:** Kodun tamamını (71.802 token) olduğu gibi vermek bağlamı doldurur ve
+  ilişkileri ajanın sıfırdan çıkarmasını gerektirir; graphify ajanı **sorgu başına
+  1.694 token** ile doğru yere yönlendirir (bkz. `docs/02-gercek-etki.md`).
 - **LLM full-context +:** Tek seferlik küçük projelerde basit; kurulum yok.
 - **Sonuç:** Repo büyüdükçe graphify'nin ölçek avantajı belirginleşir.
 
@@ -80,7 +81,7 @@
 1. **Gerçekten offline:** `--code-only` ile API key yok, LLM yok — tree-sitter yerel parse.
    (Ölçüldü: ekstraksiyon %100 extracted, yalnızca 4/931 kenar çıkarımsal.)
 2. **Ajan-first tasarım:** `query / path / explain` çıktıları doğrudan LLM bağlamı olacak
-   şekilde kısa ve odaklı (ölçülen tek sorgu: 6,4 KB).
+   şekilde kısa ve odaklı (ölçülen tek sorgu: 1.694 token).
 3. **Bellek sistemi:** `save-result` + `reflect` → "hangi yol işe yaradı" öğrenilir;
    çıkmazlar bir daha taranmaz. (Ölçüldü: 12 anı, 11 useful, 1 dead end.)
 4. **God node'lar / topluluklar:** Projenin gerçek çekirdeği (`predict()` 24 kenar,

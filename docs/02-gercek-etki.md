@@ -1,6 +1,8 @@
-# 📊 Graphify'in Bu Projede Gerçek Etkisi
+# 📊 Graphify'in Bu Projede Gerçek Etki
 
 > Tüm rakamlar **ölçüldü** (2026-08-16, `graphify 0.9.43`) — tahmin veya uydurma yok.
+> Token ölçümleri `cl100k_base` tokenizer ile yapıldı; dosya seti `node_modules`/`dist`
+> hariç kaynak kod (`services/` altındaki `.py` + `.ts` + `.tsx`).
 > Kaynak proje: **Critic Forecast** (çok modelli finansal tahminleme platformu).
 
 ---
@@ -11,33 +13,34 @@
 
 | Metrik | Değer |
 |---|---|
-| Kaynak dosya sayısı (`services/` .py + .ts + .tsx) | **324 dosya** |
-| Toplam kod satırı | **164.816 satır** |
+| Kaynak dosya sayısı | **67 dosya** |
+| Toplam kod satırı | **7.580 satır** |
+| Ham metin boyutu | **265 KB · 71.802 token** |
 | İlk ekstrakt (kurulum sonrası) | 354 node · 680 kenar · 13 topluluk |
 | Son ekstrakt (tüm geliştirmeler sonrası) | **562 node · 931 kenar · 44 topluluk** |
 
-> Graf, kodla birlikte büyüdü: proje 2× büyürken (özellik + backfill + UI), graf da
-> 354→562 node'a genişledi. Her `graphify update .` ile AST üzerinden **saniyeler içinde**
+> Graf, kodla birlikte büyüdü: proje özellik + backfill + UI ile genişlerken, graf da
+> 354→562 node'a çıktı. Her `graphify update .` ile AST üzerinden **saniyeler içinde**
 > tazeleniyor.
 
-### Grafın boyutu vs kodun boyutu
+### Tek sorgunun maliyeti (ölçülmüş)
 
 | Metrik | Değer |
 |---|---|
-| `graph.json` (tüm bilgi) | **599 KB · 562 node · 931 kenar** |
-| Ham kod metni (aynı bilginin okunması gereken hali) | 164.816 satır ≈ 8+ MB |
-| Tek bir sorgunun döndürdüğü alt graf | **6.430 bayt (68 satır)** |
+| `graphify query "forecast cone horizon ensemble"` çıktısı | **6.430 bayt · 1.694 token** |
+| Kod tabanının tamamı | 71.802 token |
+| **Token azalması** | **%97,6** (1 − 1.694 / 71.802) |
+| Bayt bazında azalma | %97,6 (6.430 bayt / 271.540 bayt) |
+| `graph.json` (tüm bilgi) | 599 KB · **167.202 token** · 562 node · 931 kenar |
 
-**Çıkarım (hesaplama örneği):** "forecast cone horizon ensemble" sorgusu `graphify query`
-ile 74 node'luk odaklı alt graf döndürdü. Tam kod tabanını okumak yerine ajan, toplam
-bilginin **~%0.1'i** kadar bağlamla doğru dosyalara yönlendi. (Oran: 6.430 bayt / ~8.2 MB
-ham metin — satır başı ~50 bayt varsayımıyla.)
+> Yani: kodun tamamını okuyup ilişkileri sıfırdan çıkarmak yerine, ajan her soruya
+> **kodun ~%2,4'ü kadar** bağlamla gidiyor ve geri kalanı hazır graf üzerinden çözüyor.
 
 ### Ekstraksiyon kalitesi (gerçek, GRAPH_REPORT.md'den)
 
 - **%100 EXTRACTED · %0 AMBIGUOUS** — tree-sitter ile deterministik parse, LLM yok
-- Yalnızca **4 çıkarımsal (inferred) kenar** (%0.4) — ortalama güven **0.8**
-- Hiçbir API çağrısı yok, tamamen offline
+- Yalnızca **4 çıkarımsal (inferred) kenar** (931 kenarın %0,4'ü) — ortalama güven **0.8**
+- Hiçbir API çağrısı yok, tamamen offline, **0 ₺ maliyet**
 
 ### Bellek sistemi (save-result + reflect — gerçek kayıtlar)
 
@@ -102,14 +105,13 @@ ham metin — satır başı ~50 bayt varsayımıyla.)
 
 | Nerede işe yaradı | Ne kazandırdı |
 |---|---|
-| Kod taraması | 164.816 satır → sorgu başına 6,4 KB alt graf (**~%0.1 bağlam**) |
+| Kod taraması | 7.580 satır / 71.802 token → sorgu başına 1.694 token (**%97,6 azalma**) |
 | Settings çıkmazı | 1 dead-end işareti → aynı hataya bir daha düşülmedi |
 | Hata ayıklama | `path`/`query` ile doğru dosyaya 1 adımda ulaşma |
 | Bellek | 12 anı → 11 useful; `qra.py`/`jobs.py` öncelikli kaynak |
 | Maliyet | **0 API çağrısı** — tree-sitter yerel parse, offline |
 | Depolama | Tüm bilgi 599 KB `graph.json` (+ ekstrakt klasörü 3,9 MB) |
 
-> ⚠️ **Dürüstlük notu:** "token tasarrufu" yüzdeleri, okunacak metin boyutunun sorgu
-> çıktısına oranıdır (satır başı ~50 bayt varsayımıyla); gerçek token tasarrufu ajanın
-> okuma davranışına göre değişir. Ölçülen **kesin** değerler: satır sayısı, node/kenar
-> sayısı, dosya boyutları ve sorgu çıktısı boyutu.
+> ⚠️ **Dürüstlük notu:** Tüm sayılar bu projede ölçüldü. Token sayıları `cl100k_base`
+> tokenizer ile; "azalma yüzdesi" = 1 − (sorgu token / tüm kod token). Gerçek tasarruf
+> ajanın okuma davranışına göre değişebilir; oran sabittir.
