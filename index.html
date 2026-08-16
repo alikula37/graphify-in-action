@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 Graphify Bu Projeyi Nasıl Hızlandırdı?</title>
+<style>
+  :root { --bg:#0b1f1e; --card:#0e3f3b; --card2:#0a3431; --teal:#2dd4bf; --pink:#fde9ff; --purple:#8b7cf6; --text:#c9dcda; --dim:#9fb8b5; --muted:#5f7a77; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:linear-gradient(160deg,#06201e,#0b1f1e 60%,#071616); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; padding:40px 20px; }
+  .wrap { max-width:880px; margin:0 auto; }
+  h1 { font-size:2.2rem; color:var(--pink); margin-bottom:8px; }
+  .sub { color:var(--dim); font-size:1.05rem; margin-bottom:32px; }
+  .hero { text-align:center; margin-bottom:36px; }
+  .badge { display:inline-block; background:rgba(45,212,191,.12); color:var(--teal); border:1px solid rgba(45,212,191,.35); border-radius:999px; padding:4px 14px; font-size:.8rem; margin:0 4px 8px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-bottom:36px; }
+  .card { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:20px; }
+  .card h3 { color:var(--pink); font-size:1rem; margin-bottom:10px; }
+  .big { font-size:2.2rem; font-weight:800; color:var(--teal); }
+  .big span { font-size:.9rem; color:var(--muted); font-weight:400; }
+  .bar-wrap { background:#072624; border-radius:8px; padding:6px; margin-top:10px; }
+  .bar { background:linear-gradient(90deg,var(--teal),var(--purple)); height:14px; border-radius:6px; }
+  .mini { color:var(--muted); font-size:.78rem; margin-top:6px; }
+  .flow { background:var(--card2); border-radius:14px; padding:20px; margin-bottom:36px; }
+  .flow img { width:100%; border-radius:10px; }
+  .steps { margin-bottom:36px; }
+  .step { display:flex; gap:16px; margin-bottom:18px; background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:16px 18px; }
+  .step .n { font-size:1.6rem; flex-shrink:0; }
+  .step b { color:var(--pink); }
+  .ok { color:var(--teal); } .no { color:#ff6b81; }
+  .note { background:rgba(139,124,246,.08); border:1px solid rgba(139,124,246,.3); border-radius:12px; padding:16px; color:var(--dim); font-size:.9rem; margin-bottom:36px; }
+  footer { color:var(--muted); font-size:.8rem; text-align:center; }
+  .cmp { display:grid; gap:12px; margin-bottom:36px; }
+  .cmp-row { display:grid; grid-template-columns:130px 1fr 1fr; gap:12px; background:var(--card); border-radius:10px; padding:12px 16px; font-size:.85rem; }
+  .cmp-row .who { color:var(--pink); font-weight:600; }
+  .cmp-row .pro { color:var(--teal); } .cmp-row .con { color:#ffb3c1; }
+  @media(max-width:600px){ .cmp-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>🧠 Graphify Bu Projeyi Nasıl Hızlandırdı?</h1>
+    <div class="sub">164.816 satır kod — <b style="color:var(--teal)">sorgu başına 6,4 KB</b> ile yönetildi 🌱</div>
+    <div>
+      <span class="badge">🔒 Tamamen offline</span>
+      <span class="badge">🌳 Tree-sitter, LLM yok</span>
+      <span class="badge">🧪 Gerçek rakamlar</span>
+      <span class="badge">📐 Ölçüm: 2026-08-16</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3>📏 Kod tabanı</h3><div class="big">164.816 <span>satır</span></div><div class="mini">324 dosya (Python + TypeScript)</div></div>
+    <div class="card"><h3>🗺️ Kod grafi</h3><div class="big">562 <span>node</span></div><div class="mini">931 kenar · 44 topluluk · 599 KB</div></div>
+    <div class="card"><h3>🎯 Sorgu başına</h3><div class="big">6,4 <span>KB</span></div><div class="mini">68 satır odaklı alt graf — ~%0.1'i</div></div>
+    <div class="card"><h3>🧠 Hafıza</h3><div class="big">12 <span>anı</span></div><div class="mini">11 işe yaradı · 1 çıkmaz öğrenildi</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>💾 Tüm bilgi vs tek sorgu</h3>
+      <div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="mini">164.816 satır ≈ 8+ MB (okumak gerekseydi)</div>
+      <div class="bar-wrap"><div class="bar" style="width:0.2%"></div></div><div class="mini">Tek sorgu çıktısı: 6.430 bayt 🎯</div>
+    </div>
+    <div class="card">
+      <h3>🔬 Ekstraksiyon kalitesi</h3>
+      <div class="big">%100 <span>extracted</span></div>
+      <div class="mini">✓ 4/931 kenar çıkarımsal (%0.4) · güven 0.8</div>
+      <div class="mini">✓ 0 API çağrısı, 0 token maliyeti</div>
+    </div>
+    <div class="card">
+      <h3>🏆 God node'lar (çekirdek)</h3>
+      <div class="mini">📍 predict() — 24 kenar</div>
+      <div class="mini">📍 get_conn() — 21 kenar</div>
+      <div class="mini">📍 _post() — 19 kenar</div>
+      <div class="mini">📍 build_critic_state() — 13 kenar</div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <h3 style="color:var(--pink); margin-bottom:12px;">🧭 Ajan nasıl yönleniyor?</h3>
+    <img src="assets/flow.svg" alt="Graphify akış diyagramı">
+  </div>
+
+  <div class="steps">
+    <div class="step"><div class="n">1️⃣</div><div><b>Kurulum:</b> <code>graphify install --project --strict</code> — strict mod, ajanın ham kaynak taramasını bloklayıp doğrudan grafa yönlendirir, sonra tekrar yönlendirmeye döner (takılmaz).</div></div>
+    <div class="step"><div class="n">2️⃣</div><div><b>Çıkmaz öğrenildi:</b> "settings sayfası" sorgusu → graf bu sayfayı bizim projede bulamadı → <span class="no">dead end</span> işaretlendi → bir daha aynı yola girilmiyor. Gerçek cevap tek sorguda: <b>8080 = eski proje, bizim UI 8081</b>.</div></div>
+    <div class="step"><div class="n">3️⃣</div><div><b>Hata ayıklama hızı:</b> backfill kuyruğu takılması (6 katmanlı hata), QRA köşe çözümü, SOL/GLD'nin 31 saniyelik veri çekişi — hepsinde <code>query/path</code> ile doğru dosyaya tek adımda ulaşıldı.</div></div>
+    <div class="step"><div class="n">4️⃣</div><div><b>Ders çıkarma:</b> <code>save-result</code> + <code>reflect</code> → <span class="ok">qra.py 3× · jobs.py 2×</span> "güvenilir kaynak" listesinde; sonraki oturumlar önce oraya bakıyor.</div></div>
+    <div class="step"><div class="n">5️⃣</div><div><b>Bayat bilgi koruması:</b> kod değişince ilgili derse <b>"yeniden doğrula"</b> bayrağı basılıyor — eski bilgiyle yanlış yönlendirme olmuyor.</div></div>
+  </div>
+
+  <div class="cmp">
+    <h3 style="color:var(--pink); margin-bottom:10px;">⚖️ Kısa karşılaştırma (detay: docs/03-karsilastirma.md)</h3>
+    <div class="cmp-row"><span class="who">grep / ripgrep</span><span class="pro">✅ her yerde var, anlık</span><span class="con">❌ ilişki yok, ajan için bağlam yok</span></div>
+    <div class="cmp-row"><span class="who">IDE + LSP</span><span class="pro">✅ insan için harika gezinme</span><span class="con">❌ ajan için programatik bağlam yok</span></div>
+    <div class="cmp-row"><span class="who">Sourcegraph</span><span class="pro">✅ kurumsal, dev repo</span><span class="con">❌ ağır sunucu, offline değil</span></div>
+    <div class="cmp-row"><span class="who">CodeQL/Semgrep</span><span class="pro">✅ gerçek güvenlik analizi</span><span class="con">❌ kural yazımı şart, gezinme değil</span></div>
+    <div class="cmp-row"><span class="who">Graphify</span><span class="pro">✅ offline AST graf + bellek + ajan-first</span><span class="con">❌ AST sınırı, doküman için API key, gitignore disiplini şart</span></div>
+  </div>
+
+  <div class="note">⚠️ <b>Dürüstlük notu:</b> Tüm rakamlar bu projede ölçüldü (graphify 0.9.43, 2026-08-16). "Token tasarrufu" yüzdeleri okunacak metin boyutunun sorgu çıktısına oranıdır (satır başı ~50 bayt varsayımı) — gerçek tasarruf ajanın okuma davranışına göre değişir. Kesin ölçümler: satır/node/kenar sayıları, dosya boyutları, sorgu çıktısı boyutu.</div>
+
+  <footer>🧠 Graphify-in-Action · kaynak proje: Critic Forecast · detaylar: <b>docs/</b> klasöründe</footer>
+</div>
+</body>
+</html>
