@@ -1,59 +1,98 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="'Segoe UI', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-label="Graphify flow: scattered files become a connected graph, then the agent navigates it">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0b1f1e"/>
       <stop offset="100%" stop-color="#052e2b"/>
     </linearGradient>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="#2dd4bf"/>
-    </marker>
+    <marker id="mT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#2dd4bf"/></marker>
+    <marker id="mP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#8b7cf6"/></marker>
+    <marker id="mC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7ee8fa"/></marker>
+    <marker id="mR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#ffb3c1"/></marker>
+    <marker id="mW" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#fde9ff"/></marker>
+    <marker id="mST" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#2dd4bf"/></marker>
   </defs>
-  <rect width="900" height="420" fill="url(#bg)" rx="16"/>
 
-  <text x="450" y="36" fill="#edfffe" font-size="20" font-weight="700" text-anchor="middle">🧭 Graphify Flow — How the Agent Navigates</text>
+  <rect width="900" height="460" fill="url(#bg)" rx="16"/>
+
+  <text x="450" y="30" fill="#edfffe" font-size="18" font-weight="700" text-anchor="middle">🧭 Graphify — scattered files → connected graph → the agent sees the whole picture</text>
+
+  <!-- Concept strip: files → graph → agent -->
+  <rect x="40" y="44" width="820" height="58" rx="10" fill="#0a2927" stroke="#1d3a37" stroke-width="1"/>
+  <rect x="52" y="60" width="52" height="20" rx="5" fill="#0e3f3b" stroke="#2dd4bf" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="78" y="74" fill="#9fb8b5" font-size="9" text-anchor="middle">qra.py</text>
+  <rect x="116" y="60" width="52" height="20" rx="5" fill="#0e3f3b" stroke="#2dd4bf" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="142" y="74" fill="#9fb8b5" font-size="9" text-anchor="middle">jobs.py</text>
+  <rect x="180" y="60" width="52" height="20" rx="5" fill="#0e3f3b" stroke="#2dd4bf" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="206" y="74" fill="#9fb8b5" font-size="9" text-anchor="middle">api.py</text>
+  <rect x="244" y="60" width="52" height="20" rx="5" fill="#0e3f3b" stroke="#2dd4bf" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="270" y="74" fill="#9fb8b5" font-size="9" text-anchor="middle">models.py</text>
+  <line x1="104" y1="70" x2="114" y2="70" stroke="#2dd4bf" stroke-width="1.1" marker-end="url(#mST)"/>
+  <line x1="168" y1="70" x2="178" y2="70" stroke="#2dd4bf" stroke-width="1.1" marker-end="url(#mST)"/>
+  <line x1="232" y1="70" x2="242" y2="70" stroke="#2dd4bf" stroke-width="1.1" marker-end="url(#mST)"/>
+  <text x="174" y="97" fill="#5f7a77" font-size="9" text-anchor="middle">scattered files</text>
+
+  <line x1="304" y1="70" x2="344" y2="70" stroke="#2dd4bf" stroke-width="2.5" marker-end="url(#mT)"/>
+  <text x="324" y="96" fill="#2dd4bf" font-size="9.5" text-anchor="middle">graphify</text>
+
+  <rect x="352" y="56" width="164" height="30" rx="8" fill="#0e3f3b" stroke="#8b7cf6" stroke-width="1.4"/>
+  <line x1="372" y1="71" x2="386" y2="63" stroke="#8b7cf6" stroke-width="1.2" opacity="0.7"/>
+  <line x1="372" y1="71" x2="386" y2="79" stroke="#8b7cf6" stroke-width="1.2" opacity="0.7"/>
+  <circle cx="372" cy="71" r="2.8" fill="#8b7cf6"/>
+  <circle cx="386" cy="63" r="2.8" fill="#8b7cf6"/>
+  <circle cx="386" cy="79" r="2.8" fill="#8b7cf6"/>
+  <text x="434" y="75" fill="#fde9ff" font-size="10.5" text-anchor="middle">knowledge graph</text>
+  <text x="434" y="96" fill="#5f7a77" font-size="8.5" text-anchor="middle">every edge = who calls whom</text>
+
+  <line x1="524" y1="70" x2="564" y2="70" stroke="#2dd4bf" stroke-width="2.5" marker-end="url(#mT)"/>
+
+  <rect x="572" y="56" width="178" height="30" rx="8" fill="#0e3f3b" stroke="#fde9ff" stroke-width="1.4"/>
+  <text x="661" y="75" fill="#fde9ff" font-size="11" text-anchor="middle">🧠 agent</text>
+  <text x="661" y="96" fill="#5f7a77" font-size="8.5" text-anchor="middle">sees the whole picture</text>
 
   <!-- Step 1 -->
-  <rect x="40" y="70" width="200" height="90" rx="10" fill="#0e3f3b" stroke="#2dd4bf" stroke-width="1.6"/>
-  <text x="140" y="96" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">1️⃣ Agent asks</text>
-  <text x="140" y="116" fill="#9fb8b5" font-size="11" text-anchor="middle">"which port is settings on?"</text>
-  <text x="140" y="132" fill="#9fb8b5" font-size="11" text-anchor="middle">"how does backtest work?"</text>
-  <text x="140" y="148" fill="#5f7a77" font-size="10" text-anchor="middle">raw scan blocked 🧊</text>
+  <rect x="40" y="116" width="200" height="90" rx="10" fill="#0e3f3b" stroke="#2dd4bf" stroke-width="1.6"/>
+  <text x="140" y="142" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">1️⃣ Agent asks</text>
+  <text x="140" y="162" fill="#9fb8b5" font-size="11" text-anchor="middle">"which port is settings on?"</text>
+  <text x="140" y="178" fill="#9fb8b5" font-size="11" text-anchor="middle">"how does backtest work?"</text>
+  <text x="140" y="194" fill="#5f7a77" font-size="10" text-anchor="middle">raw scan blocked 🧊</text>
 
   <!-- Step 2 -->
-  <rect x="350" y="70" width="200" height="90" rx="10" fill="#0e3f3b" stroke="#8b7cf6" stroke-width="1.6"/>
-  <text x="450" y="96" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">2️⃣ Graph is queried</text>
-  <text x="450" y="116" fill="#9fb8b5" font-size="11" text-anchor="middle">graphify query / path / explain</text>
-  <text x="450" y="132" fill="#9fb8b5" font-size="11" text-anchor="middle">tree-sitter · offline · no API key 🌳</text>
-  <text x="450" y="148" fill="#5f7a77" font-size="10" text-anchor="middle">focus within 562 nodes · 931 edges</text>
+  <rect x="350" y="116" width="200" height="90" rx="10" fill="#0e3f3b" stroke="#8b7cf6" stroke-width="1.6"/>
+  <text x="450" y="142" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">2️⃣ Graph is queried</text>
+  <text x="450" y="162" fill="#9fb8b5" font-size="11" text-anchor="middle">graphify query / path / explain</text>
+  <text x="450" y="178" fill="#9fb8b5" font-size="11" text-anchor="middle">tree-sitter · offline · no API key 🌳</text>
+  <text x="450" y="194" fill="#5f7a77" font-size="10" text-anchor="middle">focus within 562 nodes · 931 edges</text>
 
   <!-- Step 3 -->
-  <rect x="660" y="70" width="200" height="90" rx="10" fill="#0e3f3b" stroke="#7ee8fa" stroke-width="1.6"/>
-  <text x="760" y="96" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">3️⃣ Subgraph returns</text>
-  <text x="760" y="116" fill="#9fb8b5" font-size="11" text-anchor="middle">~74-110 nodes · 1,694 tokens</text>
-  <text x="760" y="132" fill="#9fb8b5" font-size="11" text-anchor="middle">instead of 7,580 lines 🎯</text>
-  <text x="760" y="148" fill="#5f7a77" font-size="10" text-anchor="middle">agent goes to the right files</text>
+  <rect x="660" y="116" width="200" height="90" rx="10" fill="#0e3f3b" stroke="#7ee8fa" stroke-width="1.6"/>
+  <text x="760" y="142" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">3️⃣ Subgraph returns</text>
+  <text x="760" y="162" fill="#9fb8b5" font-size="11" text-anchor="middle">~74-110 nodes · 1,694 tokens</text>
+  <text x="760" y="178" fill="#9fb8b5" font-size="11" text-anchor="middle">instead of 7,580 lines 🎯</text>
+  <text x="760" y="194" fill="#5f7a77" font-size="10" text-anchor="middle">agent goes to the right files</text>
 
-  <!-- Arrows -->
-  <line x1="240" y1="115" x2="348" y2="115" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="550" y1="115" x2="658" y2="115" stroke="#8b7cf6" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Arrows: 1→2, 2→3, 3→4 -->
+  <line x1="240" y1="161" x2="348" y2="161" stroke="#2dd4bf" stroke-width="2" marker-end="url(#mT)"/>
+  <line x1="550" y1="161" x2="658" y2="161" stroke="#8b7cf6" stroke-width="2" marker-end="url(#mP)"/>
+  <line x1="760" y1="206" x2="760" y2="250" stroke="#7ee8fa" stroke-width="2" marker-end="url(#mC)"/>
 
-  <!-- Step 4 -->
-  <rect x="40" y="220" width="400" height="80" rx="10" fill="#0e3f3b" stroke="#ffb3c1" stroke-width="1.6"/>
-  <text x="240" y="246" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">4️⃣ Result saved to memory</text>
-  <text x="240" y="266" fill="#9fb8b5" font-size="11" text-anchor="middle">graphify save-result --outcome useful | dead_end</text>
-  <text x="240" y="284" fill="#5f7a77" font-size="10" text-anchor="middle">12 memories · 11 useful · 1 dead end (measured)</text>
+  <!-- Step 5 (bottom-left) -->
+  <rect x="30" y="252" width="400" height="80" rx="10" fill="#0e3f3b" stroke="#fde9ff" stroke-width="1.6"/>
+  <text x="230" y="278" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">5️⃣ Reflect extracts lessons</text>
+  <text x="230" y="298" fill="#9fb8b5" font-size="11" text-anchor="middle">preferred vs tentative node · "re-verify" 🏷️</text>
+  <text x="230" y="316" fill="#5f7a77" font-size="10" text-anchor="middle">qra.py 3× · jobs.py 2× → prioritized source</text>
 
-  <!-- Step 5 -->
-  <rect x="460" y="220" width="400" height="80" rx="10" fill="#0e3f3b" stroke="#fde9ff" stroke-width="1.6"/>
-  <text x="660" y="246" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">5️⃣ Reflect extracts lessons</text>
-  <text x="660" y="266" fill="#9fb8b5" font-size="11" text-anchor="middle">preferred vs tentative node · "re-verify" 🏷️</text>
-  <text x="660" y="284" fill="#5f7a77" font-size="10" text-anchor="middle">qra.py 3× · jobs.py 2× → prioritized source</text>
+  <!-- Step 4 (bottom-right) -->
+  <rect x="470" y="252" width="400" height="80" rx="10" fill="#0e3f3b" stroke="#ffb3c1" stroke-width="1.6"/>
+  <text x="670" y="278" fill="#fde9ff" font-size="13" font-weight="700" text-anchor="middle">4️⃣ Result saved to memory</text>
+  <text x="670" y="298" fill="#9fb8b5" font-size="11" text-anchor="middle">graphify save-result --outcome useful | dead_end</text>
+  <text x="670" y="316" fill="#5f7a77" font-size="10" text-anchor="middle">12 memories · 11 useful · 1 dead end (measured)</text>
 
-  <!-- Bottom loop -->
-  <line x1="240" y1="300" x2="240" y2="340" stroke="#ffb3c1" stroke-width="2"/>
-  <line x1="240" y1="340" x2="660" y2="340" stroke="#fde9ff" stroke-width="2"/>
-  <line x1="660" y1="340" x2="660" y2="302" stroke="#fde9ff" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="450" y="332" fill="#5f7a77" font-size="11" text-anchor="middle">next session: "check the verified source first" ♻️</text>
+  <!-- Arrows: 4→5 (right-to-left) -->
+  <line x1="468" y1="292" x2="434" y2="292" stroke="#ffb3c1" stroke-width="2" marker-end="url(#mR)"/>
 
-  <text x="450" y="380" fill="#5f7a77" font-size="11" text-anchor="middle">code changes → graphify update . → stale knowledge is flagged 🔄</text>
+  <!-- Loop: 5 → 1 (next session) -->
+  <path d="M30,292 L20,292 L20,161 L38,161" fill="none" stroke="#fde9ff" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#mW)"/>
+
+  <text x="30" y="356" fill="#5f7a77" font-size="10.5" text-anchor="start">♻️ next session: check the verified source first</text>
+  <text x="450" y="384" fill="#5f7a77" font-size="11" text-anchor="middle">code changes → graphify update . → stale knowledge is flagged 🔄</text>
 </svg>

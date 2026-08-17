@@ -12,12 +12,21 @@
 
 ## 🌐 What is graphify?
 
-graphify is an open-source tool ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC) that maps code, docs, PDFs, images, and video into a knowledge graph you **query instead of grepping**.
+graphify reads your code and draws a **map** of it — showing which files call, depend on, or affect each other. Instead of reading files one by one (like walking every street), your AI assistant just looks at the map and goes straight to what matters.
 
-- **Code maps for free, fully local** — tree-sitter AST, deterministic, no LLM, nothing leaves your machine.
-- **Every edge is explained** — tagged `EXTRACTED` or `INFERRED` so you know what was read vs. derived.
-- **Not a vector index** — a real graph: `query`, `path`, `explain`.
-- Works in **20+ assistants** (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
+<img src="assets/graph-hero.png" alt="A real codebase mapped by graphify — nodes are concepts, colors are communities" width="720">
+
+*The FastAPI codebase mapped by graphify — every node is a concept, colors are communities. (Image: graphify, Apache-2.0)*
+
+- **A map, not a pile of files.** It pre-draws "who calls whom," so relationships are already there — the agent doesn't re-derive them every time.
+- **Read the map, not every street.** One query returns a small, relevant slice (~1.7K tokens) instead of re-reading the whole codebase (~71.8K tokens).
+- **Local, free, offline.** Built on your machine with **0 API calls** — no keys, no data leaving your computer.
+
+<img src="assets/demo-path.svg" alt="graphify path query output — shortest path between two concepts, hop by hop" width="720">
+
+*`graphify path "FastAPI" "ModelField"` — each hop is a call/import edge, so "who calls whom" is answered directly. (Image: graphify, Apache-2.0)*
+
+graphify is open-source ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC) and works in **20+ assistants** (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
 
 > 📦 Official package: `graphifyy` on PyPI (CLI: `graphify`) · https://graphify.com · This repo is an **independent case study**, not affiliated with graphify.
 
@@ -34,19 +43,9 @@ graphify is an open-source tool ([Graphify-Labs/graphify](https://github.com/Gra
 | 📉 **Token reduction** | **97.6%** | Code 71,802 tokens → single query **1,694 tokens** (cl100k_base) |
 | ✅ **Extraction quality** | **100% extracted · 0% ambiguous** | 4/931 edges inferred (0.4%) — deterministic, no LLM |
 | 💸 **Cost** | **0 API calls · $0** | tree-sitter local parse, fully offline |
-| 🗺️ **Graph size** | **562 nodes · 931 edges · 599 KB** | The whole code map in one file |
+| 🗺️ **Graph size** | **562 nodes · 931 edges · 44 communities · 599 KB** | The whole code map in one file |
 | 🧠 **Memory** | **12 queries → 11 useful · 1 dead-end** | The system learns, dead-ends aren't re-scanned |
 | ⏱️ **Answer time** | **~2 min** | Agent reaches the right files via a scoped query |
-
-#### graphify's own published benchmarks
-
-| Benchmark | Metric | graphify |
-|---|---|---|
-| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
-| LongMemEval-S (n=50) | QA accuracy | **76%** (tied with dense RAG) |
-| Graph build | LLM credits | **0** |
-
-*Source: [graphify BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)*
 
 ## 🎯 "Install it, but only if it helps" — answered with data
 
@@ -74,7 +73,17 @@ The install criterion was: *"if graphify doesn't help, or worsens token/context 
 | 📊 All measurements + real flows | [docs/en/02-real-impact.md](docs/en/02-real-impact.md) | [docs/tr/02-gercek-etki.md](docs/tr/02-gercek-etki.md) |
 | 🔧 Install & daily usage guide | [docs/en/01-installation-guide.md](docs/en/01-installation-guide.md) | [docs/tr/01-kurulum-rehberi.md](docs/tr/01-kurulum-rehberi.md) |
 | ⚖️ Neutral comparison vs alternatives | [docs/en/03-comparison.md](docs/en/03-comparison.md) | [docs/tr/03-karsilastirma.md](docs/tr/03-karsilastirma.md) |
-| 🎨 Fun summary page (browser) | `index.html` (TR/EN toggle) | `index.html` (TR/EN düğmesi) |
+| 🎨 Interactive summary page | [Live page (TR/EN toggle)](https://alikula37.github.io/graphify-in-action/) — source: `index.html` |
+
+## 🏅 graphify's own published benchmarks
+
+| Benchmark | Metric | graphify |
+|---|---|---|
+| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
+| LongMemEval-S (n=50) | QA accuracy | **76%** (tied with dense RAG) |
+| Graph build | LLM credits | **0** |
+
+*Source: [graphify BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)*
 
 ## 🚀 Get started (30 seconds)
 

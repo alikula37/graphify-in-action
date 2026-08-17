@@ -12,12 +12,21 @@
 
 ## 🌐 graphify nedir?
 
-graphify, kodu, dokümanı, PDF'i, görseli ve videoyu **grep yerine sorguladığınız** bir bilgi grafına çeviren açık kaynak bir araçtır ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC).
+graphify kodunuzu okur ve **haritasını** çıkarır — hangi dosyanın hangisini çağırdığını, ona bağlı olduğunu veya etkilediğini gösterir. Dosyaları tek tek okumak yerine (sokak sokak gezmek gibi), AI asistanınız haritaya bakar ve doğrudan işine yarayana gider.
 
-- **Kod haritası ücretsiz, tamamen yerel** — tree-sitter AST, deterministik, LLM yok, makinenizden hiçbir şey çıkmaz.
-- **Her kenar açıklanır** — `EXTRACTED` veya `INFERRED` etiketiyle: okunan mı türetilen mi belli olur.
-- **Bir vektör indeksi değil** — gerçek bir graf: `query`, `path`, `explain`.
-- **20+ asistan** destekli (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
+<img src="assets/graph-hero.png" alt="graphify ile haritalanmış gerçek bir kod tabanı — düğümler kavramlar, renkler topluluklar" width="720">
+
+*graphify ile haritalanmış FastAPI kod tabanı — her düğüm bir kavram, renkler topluluklar. (Görsel: graphify, Apache-2.0)*
+
+- **Bir dosya yığını değil, bir harita.** "Kim kimi çağırıyor"u önceden çizer; ilişkiler hazırdır — ajan her seferinde sıfırdan çıkarmaz.
+- **Haritaya bak, her sokağı gezme.** Tek sorgu, tüm kod tabanını yeniden okumak (~71,8K token) yerine küçük ve ilgili bir dilim döndürür (~1,7K token).
+- **Yerel, ücretsiz, offline.** Makinenizde **0 API çağrısıyla** kurulur — anahtar yok, veriniz bilgisayarınızdan çıkmaz.
+
+<img src="assets/demo-path.svg" alt="graphify path sorgusu çıktısı — iki kavram arasındaki en kısa yol, adım adım" width="720">
+
+*`graphify path "FastAPI" "ModelField"` — her adım bir çağrı/import kenarı, yani "kim kimi çağırıyor" doğrudan cevaplanır. (Görsel: graphify, Apache-2.0)*
+
+graphify açık kaynaktır ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC) ve **20+ asistanı** destekler (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
 
 > 📦 Resmi paket: PyPI'de `graphifyy` (CLI: `graphify`) · https://graphify.com · Bu repo **bağımsız bir vaka çalışmasıdır**, graphify ile bağlantılı değildir.
 
@@ -34,19 +43,9 @@ graphify, kodu, dokümanı, PDF'i, görseli ve videoyu **grep yerine sorguladı�
 | 📉 **Token azalması** | **%97,6** | Kod 71.802 token → tek sorgu **1.694 token** (cl100k_base) |
 | ✅ **Ekstraksiyon kalitesi** | **%100 extracted · %0 ambiguous** | 931 kenarın 4'ü çıkarımsal (%0,4) — deterministik, LLM yok |
 | 💸 **Maliyet** | **0 API çağrısı · 0 ₺** | tree-sitter yerel parse, tamamen offline |
-| 🗺️ **Graf boyutu** | **562 node · 931 kenar · 599 KB** | Tüm kod haritası tek dosyada |
+| 🗺️ **Graf boyutu** | **562 node · 931 kenar · 44 topluluk · 599 KB** | Tüm kod haritası tek dosyada |
 | 🧠 **Bellek** | **12 sorgu → 11 useful · 1 dead-end** | Sistem öğrenir, çıkmazlar tekrar taranmaz |
 | ⏱️ **Cevap süresi** | **~2 dk** | Ajan, odaklı sorguyla doğru dosyalara ulaşır |
-
-#### graphify'nin kendi yayınladığı benchmark'lar
-
-| Benchmark | Metrik | graphify |
-|---|---|---|
-| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
-| LongMemEval-S (n=50) | QA doğruluğu | **%76** (dense RAG ile eşit) |
-| Graf oluşturma | LLM kredisi | **0** |
-
-*Kaynak: [graphify BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)*
 
 ## 🎯 "Kur, ama sadece işe yararsa" — veriyle cevabı
 
@@ -74,7 +73,17 @@ Kurulum kriteri şuydu: *"graphify işe yaramazsa ya da token/context kullanım�
 | 📊 Tüm ölçümler + gerçek akışlar | [docs/en/02-real-impact.md](docs/en/02-real-impact.md) | [docs/tr/02-gercek-etki.md](docs/tr/02-gercek-etki.md) |
 | 🔧 Kurulum & günlük kullanım rehberi | [docs/en/01-installation-guide.md](docs/en/01-installation-guide.md) | [docs/tr/01-kurulum-rehberi.md](docs/tr/01-kurulum-rehberi.md) |
 | ⚖️ Muadillerle tarafsız karşılaştırma | [docs/en/03-comparison.md](docs/en/03-comparison.md) | [docs/tr/03-karsilastirma.md](docs/tr/03-karsilastirma.md) |
-| 🎨 Eğlenceli özet sayfa (tarayıcıda) | `index.html` (TR/EN düğmesi) | `index.html` (TR/EN toggle) |
+| 🎨 Etkileşimli özet sayfa | [Canlı sayfa (TR/EN düğmesi)](https://alikula37.github.io/graphify-in-action/) — kaynak: `index.html` |
+
+## 🏅 graphify'nin kendi yayınladığı benchmark'lar
+
+| Benchmark | Metrik | graphify |
+|---|---|---|
+| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
+| LongMemEval-S (n=50) | QA doğruluğu | **%76** (dense RAG ile eşit) |
+| Graf oluşturma | LLM kredisi | **0** |
+
+*Kaynak: [graphify BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)*
 
 ## 🚀 Başla (30 saniye)
 
