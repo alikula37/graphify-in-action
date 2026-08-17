@@ -88,7 +88,7 @@
 
   <div class="flow">
     <h3 style="color:var(--pink); margin-bottom:12px;" data-i18n="flow_h"></h3>
-    <img id="flow-img" src="assets/flow.svg" alt="Graphify flow diagram">
+    <img id="flow-img" src="assets/flow.png" alt="Graphify flow diagram">
   </div>
 
   <div class="steps">
@@ -176,7 +176,7 @@ function setLang(lang) {
     const k = el.getAttribute('data-i18n');
     if (d[k] !== undefined) el.innerHTML = d[k];
   });
-  document.getElementById('flow-img').src = lang === 'tr' ? 'assets/flow.tr.svg' : 'assets/flow.svg';
+  document.getElementById('flow-img').src = lang === 'tr' ? 'assets/flow.tr.png' : 'assets/flow.png';
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
   try { localStorage.setItem('gf-lang', lang); } catch(e) {}

@@ -6,7 +6,7 @@
 
 **Diğer dillerde oku:** 🇺🇸 [English](README.md)
 
-![Akış](assets/flow.tr.svg)
+![Akış](assets/flow.tr.png)
 
 ---
 
@@ -22,7 +22,7 @@ graphify kodunuzu okur ve **haritasını** çıkarır — hangi dosyanın hangis
 - **Haritaya bak, her sokağı gezme.** Tek sorgu, tüm kod tabanını yeniden okumak (~71,8K token) yerine küçük ve ilgili bir dilim döndürür (~1,7K token).
 - **Yerel, ücretsiz, offline.** Makinenizde **0 API çağrısıyla** kurulur — anahtar yok, veriniz bilgisayarınızdan çıkmaz.
 
-<img src="assets/demo-path.svg" alt="graphify path sorgusu çıktısı — iki kavram arasındaki en kısa yol, adım adım" width="720">
+<img src="assets/demo-path.png" alt="graphify path sorgusu çıktısı — iki kavram arasındaki en kısa yol, adım adım" width="720">
 
 *`graphify path "FastAPI" "ModelField"` — her adım bir çağrı/import kenarı, yani "kim kimi çağırıyor" doğrudan cevaplanır. (Görsel: graphify, Apache-2.0)*
 
@@ -98,4 +98,4 @@ Ardından AI asistanında `/graphify .` çalıştır — üç dosya alırsın (`
 
 ---
 
-*Kaynak proje: [Critic Forecast](https://github.com/alikula37/critic-forecast) — çok modelli finansal tahminleme platformu (private). graphify 0.9.43 ile ölçüldü (yazım anında güncel: 0.9.45).*
+*Kaynak proje: Critic Forecast — çok modelli finansal tahminleme platformu (private repo, burada linklenmemiştir). graphify 0.9.43 ile ölçüldü (yazım anında güncel: 0.9.45).*

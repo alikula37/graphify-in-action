@@ -6,7 +6,7 @@
 
 **Read this in other languages:** 🇹🇷 [Türkçe](README.tr.md)
 
-![Flow](assets/flow.svg)
+![Flow](assets/flow.png)
 
 ---
 
@@ -22,7 +22,7 @@ graphify reads your code and draws a **map** of it — showing which files call,
 - **Read the map, not every street.** One query returns a small, relevant slice (~1.7K tokens) instead of re-reading the whole codebase (~71.8K tokens).
 - **Local, free, offline.** Built on your machine with **0 API calls** — no keys, no data leaving your computer.
 
-<img src="assets/demo-path.svg" alt="graphify path query output — shortest path between two concepts, hop by hop" width="720">
+<img src="assets/demo-path.png" alt="graphify path query output — shortest path between two concepts, hop by hop" width="720">
 
 *`graphify path "FastAPI" "ModelField"` — each hop is a call/import edge, so "who calls whom" is answered directly. (Image: graphify, Apache-2.0)*
 
@@ -98,4 +98,4 @@ For a **one-step AI-agent install prompt** (with the "install only if it helps" 
 
 ---
 
-*Source project: [Critic Forecast](https://github.com/alikula37/critic-forecast) — a multi-model financial forecasting platform (private). Measured with graphify 0.9.43 (current at time of writing: 0.9.45).*
+*Source project: Critic Forecast — a multi-model financial forecasting platform (private repo, not linked here). Measured with graphify 0.9.43 (current at time of writing: 0.9.45).*
