@@ -3,7 +3,7 @@
 > All numbers are **measured** (2026-08-16, `graphify 0.9.43`) — no estimates or invention.
 > Token counts use the `cl100k_base` tokenizer; the file set is source code only
 > (`.py` + `.ts` + `.tsx` under `services/`, excluding `node_modules`/`dist`).
-> Source project: **Critic Forecast** (a multi-model financial forecasting platform).
+> Source project: **a multi-model financial forecasting platform** (private).
 
 🇹🇷 [Türkçe sürüm](../tr/02-gercek-etki.md)
 
@@ -51,11 +51,11 @@
 | Saved query memories | **12** |
 | Useful | **11** |
 | Dead-end | **1** |
-| Reflect output: "Preferred sources" | `qra.py` (3×), `jobs.py` (2×) |
-| "Tentative" | `client.ts`, `historical.py`, `dataset.py`, `ensembler.py`, `walkforward.py` |
+| Reflect output: "Preferred sources" | the ensemble module (3×), the job module (2×) |
+| "Tentative" | the API client, the historical-data module, the dataset module, the ensembler module, the walk-forward module |
 
-> Reflect's output was actually used: in later sessions, questions about QRA and the job
-> infrastructure went **to `qra.py` / `jobs.py` first** — verified sources are prioritized.
+> Reflect's output was actually used: in later sessions, questions about the ensemble and the job
+> infrastructure went **to the ensemble and job modules first** — verified sources are prioritized.
 
 ---
 
@@ -65,41 +65,40 @@
 
 1. `graphify query "make the settings page items wider"` → the graph **couldn't find a
    settings page in this project** (no node) → marked as a dead-end.
-2. `graphify query "which port is the settings page on"` → solved in one query:
-   **8080 = the old project (crypto_dollar_yield), our UI is on 8081, we have no settings
-   page**. Saved as `useful`.
+2. `graphify query "does this project have a settings page"` → answered in one query:
+   **that page belongs to an older, unrelated project — not this one**. Saved as `useful`.
 3. `graphify reflect` → "settings" is now on the **known dead-end** list → nobody re-scans
    that path.
 
-> ⏱️ 2 queries ≈ 2 minutes. Without the graph: manually searching App.tsx + Header + every
-> page component, diving into the old project and wasting time in the wrong place…
+> ⏱️ 2 queries ≈ 2 minutes. Without the graph: manually searching the UI components and page
+> definitions, diving into an unrelated old project and wasting time in the wrong place…
 
 ### Flow 2 — UI audit: empty fan chart 🖼️
 
-- The agent audited `SimulationPage.tsx` + `PriceChart.tsx`; found that the **fan chart was
+- The agent audited the simulation and chart components; found that the **fan chart was
   never actually built** (conditionally rendered container). The lesson was saved via
   `save-result`.
-- `client.ts`, `historical.py`, etc. were added to "Preferred sources" in LESSONS.md.
+- The API client, the historical-data module, etc. were added to "Preferred sources" in LESSONS.md.
 - Result: **the same class of bugs** (silent `catch`, missing unmount cleanup) became a
   priority checklist in later audits.
 
 ### Flow 3 — Backfill queue stuck 🐛
 
-- A 6-layer error chain (worker image name, RQ timeout, lost `end_offset`, NameError, redis
-  blip, GLD fetch) — at each step `graphify path`/`query` navigated to the right files, and
-  each lesson was saved.
-- After reflect, `jobs.py` rose to "Preferred" with **2× useful**.
+- A multi-layer error chain (a wrong worker image name, queue timeouts, a lost offset, a
+  typo, a storage hiccup, a slow data fetch) — at each step `graphify path`/`query`
+  navigated to the right files, and each lesson was saved.
+- After reflect, the job module rose to "Preferred" with **2× useful**.
 
-### Flow 4 — QRA corner solution 🎯
+### Flow 4 — Ensemble corner solution 🎯
 
-- `graphify query "why does QRA return a corner solution"` → the LP collapses onto a single
-  model in a small sample → the **30% equal-weight shrink** decision. Lesson saved; the
-  `qra.py` node was marked as a reliable source.
+- `graphify query "why does the ensemble return a corner solution"` → the optimizer collapses
+  onto a single model in a small sample → the **30% equal-weight shrink** decision. Lesson
+  saved; the ensemble module was marked as a reliable source.
 
-### Flow 5 — Slow SOL/GLD data 🐢→⚡
+### Flow 5 — Slow data fetch 🐢→⚡
 
-- `graphify query` reached the provider cache logic → understood why SOL's 2,197 bars were
-  re-fetched every time (cache `len >= 3000` condition) → fixed.
+- `graphify query` reached the provider cache logic → understood why one asset's 2,197 bars were
+  re-fetched every time (a cache-size condition) → fixed.
 - 31-second loads dropped to **~200 ms**. Lesson: "don't re-fetch when the cache is big enough".
 
 ---
@@ -111,7 +110,7 @@
 | Code navigation | 7,580 lines / 71,802 tokens → 1,694 tokens per query (**97.6% reduction**) |
 | Settings dead-end | 1 dead-end flag → the same mistake was never repeated |
 | Debugging | `path`/`query` → the right file in one step |
-| Memory | 12 memories → 11 useful; `qra.py`/`jobs.py` prioritized |
+| Memory | 12 memories → 11 useful; the ensemble and job modules prioritized |
 | Cost | **0 API calls** — tree-sitter local parse, offline |
 | Storage | All knowledge in a 599 KB `graph.json` (+ 3.9 MB extraction folder) |
 

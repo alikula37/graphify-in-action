@@ -98,4 +98,4 @@ Ardından AI asistanında `/graphify .` çalıştır — üç dosya alırsın (`
 
 ---
 
-*Kaynak proje: Critic Forecast — çok modelli finansal tahminleme platformu (private repo, burada linklenmemiştir). graphify 0.9.43 ile ölçüldü (yazım anında güncel: 0.9.45).*
+*Kaynak proje: çok modelli finansal tahminleme platformu (private repo, burada linklenmemiştir). graphify 0.9.43 ile ölçüldü (yazım anında güncel: 0.9.45).*

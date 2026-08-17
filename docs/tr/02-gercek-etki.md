@@ -5,7 +5,7 @@
 > Tüm rakamlar **ölçüldü** (2026-08-16, `graphify 0.9.43`) — tahmin veya uydurma yok.
 > Token ölçümleri `cl100k_base` tokenizer ile yapıldı; dosya seti `node_modules`/`dist`
 > hariç kaynak kod (`services/` altındaki `.py` + `.ts` + `.tsx`).
-> Kaynak proje: **Critic Forecast** (çok modelli finansal tahminleme platformu).
+> Kaynak proje: **çok modelli finansal tahminleme platformu** (private).
 
 ---
 
@@ -51,11 +51,11 @@
 | Kaydedilmiş sorgu anısı | **12** |
 | İşe yarayan (useful) | **11** |
 | Çıkmaz (dead end) | **1** |
-| Reflect çıktısı: "Preferred sources" | `qra.py` (3×), `jobs.py` (2×) |
-| "Tentative" | `client.ts`, `historical.py`, `dataset.py`, `ensembler.py`, `walkforward.py` |
+| Reflect çıktısı: "Preferred sources" | ensemble modülü (3×), job modülü (2×) |
+| "Tentative" | API client, tarihsel veri modülü, veri seti modülü, ensembler modülü, walk-forward modülü |
 
-> Reflect'in sonucu gerçekten kullanıldı: sonraki oturumlarda QRA ve job altyapısıyla ilgili
-> sorular **önce `qra.py` / `jobs.py`'ye** gidiyor — doğrulanmış kaynaklar öncelikli.
+> Reflect'in sonucu gerçekten kullanıldı: sonraki oturumlarda ensemble ve job altyapısıyla ilgili
+> sorular **önce ensemble ve job modüllerine** gidiyor — doğrulanmış kaynaklar öncelikli.
 
 ---
 
@@ -65,40 +65,39 @@
 
 1. `graphify query "settings sayfasındaki ögeleri geniş yap"` → graf, sayfayı **bu projede
    bulamadı** (node yok) → dead end işaretlendi.
-2. `graphify query "settings sayfası hangi portta"` → tek sorguda çözüm: **8080 = eski
-   proje (kripto_dolar_yield), bizim UI 8081'de, bizde settings yok**. Sonuç `useful`
-   kaydedildi.
+2. `graphify query "bu projede settings sayfası var mı"` → tek sorguda çözüm: **o sayfa
+   alakasız, eski bir projeye ait — bu projeye değil**. Sonuç `useful` kaydedildi.
 3. `graphify reflect` → "settings" artık **known dead end** listesinde → kimse aynı yolu
    bir daha taramıyor.
 
-> ⏱️ 2 sorgu ≈ 2 dakika. Graf olmasaydı: App.tsx + Header + tüm sayfa bileşenlerini elle
-> aramak, eski projeye dalıp yanlış yerde vakit harcamak…
+> ⏱️ 2 sorgu ≈ 2 dakika. Graf olmasaydı: UI bileşenlerini ve sayfa tanımlarını elle
+> aramak, alakasız eski bir projeye dalıp yanlış yerde vakit harcamak…
 
 ### Akış 2 — UI denetimi: boş fan chart 🖼️
 
-- Ajan `SimulationPage.tsx` + `PriceChart.tsx`'i denetledi; **fan chart'ın hiç kurulmadığını**
+- Ajan simülasyon ve grafik bileşenlerini denetledi; **fan chart'ın hiç kurulmadığını**
   (koşullu render edilen container) buldu. Ders `save-result` ile kaydedildi.
-- LESSONS.md'de "Preferred sources" arasına `client.ts`, `historical.py` vb. eklendi.
+- LESSONS.md'de "Preferred sources" arasına API client, tarihsel veri modülü vb. eklendi.
 - Sonuç: **aynı sınıftan hatalar** (sessiz `catch`, unmount temizliği eksikliği) sonraki
   denetimlerde öncelikli kontrol listesinde.
 
 ### Akış 3 — Backfill kuyruğu takıldı 🐛
 
-- 6 katmanlı hata zinciri (worker imaj adı, RQ timeout, `end_offset` kaybı, NameError,
-  redis blip, GLD fetch) — her adımda `graphify path`/`query` ile doğru dosyalara gidildi,
-  her ders kaydedildi.
-- Reflect sonrası `jobs.py` **2× useful** olarak "Preferred" listesine çıktı.
+- Çok katmanlı hata zinciri (yanlış worker imaj adı, kuyruk timeout'ları, kayıp offset, bir
+  yazım hatası, depolama aksaklığı, yavaş veri çekimi) — her adımda `graphify path`/`query`
+  ile doğru dosyalara gidildi, her ders kaydedildi.
+- Reflect sonrası job modülü **2× useful** olarak "Preferred" listesine çıktı.
 
-### Akış 4 — QRA köşe çözümü 🎯
+### Akış 4 — Ensemble köşe çözümü 🎯
 
-- `graphify query "QRA neden köşe çözümü veriyor"` → LP'nin küçük örnekte tek modele
-  yığılması → **%30 eşit ağırlık shrink** kararı. Ders kaydedildi, node `qra.py` güvenilir
-  kaynak olarak işaretlendi.
+- `graphify query "ensemble neden köşe çözümü veriyor"` → optimizasyonun küçük örnekte tek
+  modele yığılması → **%30 eşit ağırlık shrink** kararı. Ders kaydedildi, ensemble modülü
+  güvenilir kaynak olarak işaretlendi.
 
-### Akış 5 — SOL/GLD yavaş veri 🐢→⚡
+### Akış 5 — Yavaş veri çekimi 🐢→⚡
 
-- `graphify query` ile provider cache mantığına ulaşıldı → SOL'un 2.197 barının neden her
-  seferinde yeniden çekildiği anlaşıldı (cache `len >= 3000` şartı) → düzeltildi.
+- `graphify query` ile provider cache mantığına ulaşıldı → bir varlığın 2.197 barının neden
+  her seferinde yeniden çekildiği anlaşıldı (bir cache boyutu şartı) → düzeltildi.
 - 31 saniyelik yüklemeler **~200 ms**'ye indi. Ders: "cache yeterliyse boyut aramasın".
 
 ---
@@ -110,7 +109,7 @@
 | Kod taraması | 7.580 satır / 71.802 token → sorgu başına 1.694 token (**%97,6 azalma**) |
 | Settings çıkmazı | 1 dead-end işareti → aynı hataya bir daha düşülmedi |
 | Hata ayıklama | `path`/`query` ile doğru dosyaya 1 adımda ulaşma |
-| Bellek | 12 anı → 11 useful; `qra.py`/`jobs.py` öncelikli kaynak |
+| Bellek | 12 anı → 11 useful; ensemble ve job modülleri öncelikli kaynak |
 | Maliyet | **0 API çağrısı** — tree-sitter yerel parse, offline |
 | Depolama | Tüm bilgi 599 KB `graph.json` (+ ekstrakt klasörü 3,9 MB) |
 

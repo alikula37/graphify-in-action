@@ -36,7 +36,7 @@
 
 ### 🆚 IDE + LSP
 - **graphify +:** Produces **programmatic context** for an agent (LLM); IDE navigation is
-  for human eyes. God nodes (e.g. `predict()` 24 edges) reveal the project's true core
+  for human eyes. God nodes (e.g. a core function with 24 edges) reveal the project's true core
   up front.
 - **IDE +:** Instant, interactive, debugger-integrated; graphify doesn't replace it.
 - **Verdict:** They serve different consumers; graphify is built for the agent era.
@@ -87,8 +87,8 @@
    become LLM context directly (measured single query: 1,694 tokens).
 3. **Memory system:** `save-result` + `reflect` → "which path worked" is learned;
    dead-ends aren't re-scanned. (Measured: 12 memories, 11 useful, 1 dead-end.)
-4. **God nodes / communities:** The project's true core (`predict()` 24 edges,
-   `get_conn()` 21 edges) is auto-discovered — a new agent knows "where to start" at
+4. **God nodes / communities:** The project's true core (a core function with 24 edges,
+   a connection helper with 21 edges) is auto-discovered — a new agent knows "where to start" at
    second zero.
 5. **Re-verify flag on code change:** Stale knowledge isn't trusted.
 6. **Gitignore awareness:** Clear warning about the `graphify-out/` prompt-cache risk.

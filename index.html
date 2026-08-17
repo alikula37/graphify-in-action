@@ -125,12 +125,12 @@ const I18N = {
     c4: "🧠 Memory", u_mem: "memories", c4m: "11 useful · 1 dead-end learned",
     c5: "💾 All info vs one query", c5a: "71,802 tokens — all code", c5b: "1,694 tokens — one query (2.4% of the code) 🎯",
     c6: "🔬 Extraction quality", u_extr: "extracted", c6a: "✓ 4/931 edges inferred (0.4%) · confidence 0.8", c6b: "✓ 0 API calls, 0 token cost",
-    c7: "🏆 God nodes (core)", c7a: "📍 predict() — 24 edges", c7b: "📍 get_conn() — 21 edges", c7c: "📍 _post() — 19 edges", c7d: "📍 build_critic_state() — 13 edges",
+    c7: "🏆 God nodes (core)", c7a: "📍 core prediction fn — 24 edges", c7b: "📍 connection helper — 21 edges", c7c: "📍 request helper — 19 edges", c7d: "📍 state builder — 13 edges",
     flow_h: "🧭 How does the agent navigate?",
     s1t: "Install: ", s1: "<code>graphify install --project --strict</code> — strict mode blocks the agent's raw source scan and routes it to the graph, then reverts to nudge mode (never gets stuck).",
-    s2t: "Dead-end learned: ", s2: "the \"settings page\" query → the graph couldn't find it in our project → <span class='no'>dead end</span> flagged → never re-scanned. The real answer in one query: <b>8080 = old project, our UI is 8081</b>.",
-    s3t: "Debugging speed: ", s3: "backfill queue stuck (6-layer error), QRA corner solution, SOL/GLD's 31-second fetch — all reached the right file in one step via <code>query/path</code>.",
-    s4t: "Extracting lessons: ", s4: "<code>save-result</code> + <code>reflect</code> → <span class='ok'>qra.py 3× · jobs.py 2×</span> on the \"trusted source\" list; later sessions check there first.",
+    s2t: "Dead-end learned: ", s2: "the \"settings page\" query → the graph couldn't find it in our project → <span class='no'>dead end</span> flagged → never re-scanned. The real answer in one query: <b>it belongs to an older, unrelated project</b>.",
+    s3t: "Debugging speed: ", s3: "backfill queue stuck (multi-layer error), an ensemble corner solution, a 31-second data fetch — all reached the right file in one step via <code>query/path</code>.",
+    s4t: "Extracting lessons: ", s4: "<code>save-result</code> + <code>reflect</code> → <span class='ok'>ensemble module 3× · job module 2×</span> on the \"trusted source\" list; later sessions check there first.",
     s5t: "Stale-knowledge guard: ", s5: "when code changes, the related lesson gets a <b>\"re-verify\"</b> flag — no wrong routing from outdated info.",
     cmp_h: "⚖️ Quick comparison (details: docs/en/03-comparison.md)",
     cmp1p: "✅ everywhere, instant", cmp1c: "❌ no relationships, no agent context",
@@ -139,7 +139,7 @@ const I18N = {
     cmp4p: "✅ real security analysis", cmp4c: "❌ requires rules, not navigation",
     cmp5p: "✅ offline AST graph + memory + agent-first", cmp5c: "❌ AST limits, API key for docs, gitignore discipline",
     honest: "⚠️ <b>Honesty note:</b> All numbers were measured on this project (graphify 0.9.43, 2026-08-16). The \"token savings\" percentage is the ratio of query output to the whole codebase. Exact measurements: lines/nodes/edges, file sizes, query output size.",
-    footer: "🧠 Graphify-in-Action · source project: Critic Forecast · details in the <b>docs/</b> folder"
+    footer: "🧠 Graphify-in-Action · source project: a financial forecasting platform · details in the <b>docs/</b> folder"
   },
   tr: {
     h1: "🧠 Graphify Bu Projeyi Nasıl Hızlandırdı?",
@@ -151,12 +151,12 @@ const I18N = {
     c4: "🧠 Hafıza", u_mem: "anı", c4m: "11 işe yaradı · 1 çıkmaz öğrenildi",
     c5: "💾 Tüm bilgi vs tek sorgu", c5a: "71.802 token — tüm kod", c5b: "1.694 token — tek sorgu (kodun %2,4'ü) 🎯",
     c6: "🔬 Ekstraksiyon kalitesi", u_extr: "extracted", c6a: "✓ 4/931 kenar çıkarımsal (%0.4) · güven 0.8", c6b: "✓ 0 API çağrısı, 0 token maliyeti",
-    c7: "🏆 God node'lar (çekirdek)", c7a: "📍 predict() — 24 kenar", c7b: "📍 get_conn() — 21 kenar", c7c: "📍 _post() — 19 kenar", c7d: "📍 build_critic_state() — 13 kenar",
+    c7: "🏆 God node'lar (çekirdek)", c7a: "📍 çekirdek tahmin fn — 24 kenar", c7b: "📍 bağlantı yardımcısı — 21 kenar", c7c: "📍 istek yardımcısı — 19 kenar", c7d: "📍 state builder — 13 kenar",
     flow_h: "🧭 Ajan nasıl yönleniyor?",
     s1t: "Kurulum: ", s1: "<code>graphify install --project --strict</code> — strict mod, ajanın ham kaynak taramasını bloklayıp doğrudan grafa yönlendirir, sonra tekrar yönlendirmeye döner (takılmaz).",
-    s2t: "Çıkmaz öğrenildi: ", s2: "\"settings sayfası\" sorgusu → graf bu sayfayı bizim projede bulamadı → <span class='no'>dead end</span> işaretlendi → bir daha aynı yola girilmiyor. Gerçek cevap tek sorguda: <b>8080 = eski proje, bizim UI 8081</b>.",
-    s3t: "Hata ayıklama hızı: ", s3: "backfill kuyruğu takılması (6 katmanlı hata), QRA köşe çözümü, SOL/GLD'nin 31 saniyelik veri çekişi — hepsinde <code>query/path</code> ile doğru dosyaya tek adımda ulaşıldı.",
-    s4t: "Ders çıkarma: ", s4: "<code>save-result</code> + <code>reflect</code> → <span class='ok'>qra.py 3× · jobs.py 2×</span> \"güvenilir kaynak\" listesinde; sonraki oturumlar önce oraya bakıyor.",
+    s2t: "Çıkmaz öğrenildi: ", s2: "\"settings sayfası\" sorgusu → graf bu sayfayı bizim projede bulamadı → <span class='no'>dead end</span> işaretlendi → bir daha aynı yola girilmiyor. Gerçek cevap tek sorguda: <b>o sayfa alakasız, eski bir projeye ait</b>.",
+    s3t: "Hata ayıklama hızı: ", s3: "backfill kuyruğu takılması (çok katmanlı hata), ensemble köşe çözümü, 31 saniyelik veri çekişi — hepsinde <code>query/path</code> ile doğru dosyaya tek adımda ulaşıldı.",
+    s4t: "Ders çıkarma: ", s4: "<code>save-result</code> + <code>reflect</code> → <span class='ok'>ensemble modülü 3× · job modülü 2×</span> \"güvenilir kaynak\" listesinde; sonraki oturumlar önce oraya bakıyor.",
     s5t: "Bayat bilgi koruması: ", s5: "kod değişince ilgili derse <b>\"yeniden doğrula\"</b> bayrağı basılıyor — eski bilgiyle yanlış yönlendirme olmuyor.",
     cmp_h: "⚖️ Kısa karşılaştırma (detay: docs/tr/03-karsilastirma.md)",
     cmp1p: "✅ her yerde var, anlık", cmp1c: "❌ ilişki yok, ajan için bağlam yok",
@@ -165,7 +165,7 @@ const I18N = {
     cmp4p: "✅ gerçek güvenlik analizi", cmp4c: "❌ kural yazımı şart, gezinme değil",
     cmp5p: "✅ offline AST graf + bellek + ajan-first", cmp5c: "❌ AST sınırı, doküman için API key, gitignore disiplini şart",
     honest: "⚠️ <b>Dürüstlük notu:</b> Tüm rakamlar bu projede ölçüldü (graphify 0.9.43, 2026-08-16). \"Token tasarrufu\" yüzdeleri, sorgu çıktısının tüm kod tabanına oranıdır. Kesin ölçümler: satır/node/kenar sayıları, dosya boyutları, sorgu çıktısı boyutu.",
-    footer: "🧠 Graphify-in-Action · kaynak proje: Critic Forecast · detaylar: <b>docs/</b> klasöründe"
+    footer: "🧠 Graphify-in-Action · kaynak proje: finansal tahminleme platformu · detaylar: <b>docs/</b> klasöründe"
   }
 };
 

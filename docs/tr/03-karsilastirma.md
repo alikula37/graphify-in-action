@@ -36,7 +36,7 @@
 
 ### 🆚 IDE + LSP
 - **Graphify +:** Ajan (LLM) için **programatik bağlam** üretir; IDE navigasyonu insan
-  gözü içindir. God node'lar (örn. `predict()` 24 kenar) projenin gerçek çekirdeğini
+  gözü içindir. God node'lar (örn. çekirdek bir fonksiyon, 24 kenar) projenin gerçek çekirdeğini
   önceden gösterir.
 - **IDE +:** Anlık, etkileşimli, hata ayıklama entegreli; graphify bunun yerine geçmez.
 - **Sonuç:** İkisi farklı tüketicilere hizmet eder; graphify ajan devri için tasarlandı.
@@ -86,8 +86,8 @@
    şekilde kısa ve odaklı (ölçülen tek sorgu: 1.694 token).
 3. **Bellek sistemi:** `save-result` + `reflect` → "hangi yol işe yaradı" öğrenilir;
    çıkmazlar bir daha taranmaz. (Ölçüldü: 12 anı, 11 useful, 1 dead end.)
-4. **God node'lar / topluluklar:** Projenin gerçek çekirdeği (`predict()` 24 kenar,
-   `get_conn()` 21 kenar) otomatik keşfedilir — yeni gelen ajan 0. saniyede "nereden
+4. **God node'lar / topluluklar:** Projenin gerçek çekirdeği (çekirdek bir fonksiyon 24 kenar,
+   bağlantı yardımcısı 21 kenar) otomatik keşfedilir — yeni gelen ajan 0. saniyede "nereden
    başlamalı" bilir.
 5. **Kod değişiminde yeniden doğrulama bayrağı:** Bayat bilgiye güvenilmez.
 6. **Gitignore bilinci:** `graphify-out/` prompt cache riski konusunda net uyarı var.

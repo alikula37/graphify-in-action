@@ -98,4 +98,4 @@ For a **one-step AI-agent install prompt** (with the "install only if it helps" 
 
 ---
 
-*Source project: Critic Forecast — a multi-model financial forecasting platform (private repo, not linked here). Measured with graphify 0.9.43 (current at time of writing: 0.9.45).*
+*Source project: a multi-model financial forecasting platform (private repo, not linked here). Measured with graphify 0.9.43 (current at time of writing: 0.9.45).*
