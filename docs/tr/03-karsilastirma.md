@@ -1,5 +1,7 @@
 # ⚖️ Graphify vs Muadilleri — Tarafsız Karşılaştırma
 
+🇺🇸 [English version](../en/03-comparison.md)
+
 > Amaç: hangi araç ne zaman mantıklı? Graphify'in artıları/eksileri + alternatiflerin
 > artıları/eksileri. Sıralama/övgü yok, karşılaştırma var. 🔍
 
@@ -64,7 +66,7 @@
 ### 🆚 LLM'e tüm kodu yapıştırmak
 - **Graphify +:** Kodun tamamını (71.802 token) olduğu gibi vermek bağlamı doldurur ve
   ilişkileri ajanın sıfırdan çıkarmasını gerektirir; graphify ajanı **sorgu başına
-  1.694 token** ile doğru yere yönlendirir (bkz. `docs/02-gercek-etki.md`).
+  1.694 token** ile doğru yere yönlendirir (bkz. [`02-gercek-etki.md`](02-gercek-etki.md)).
 - **LLM full-context +:** Tek seferlik küçük projelerde basit; kurulum yok.
 - **Sonuç:** Repo büyüdükçe graphify'nin ölçek avantajı belirginleşir.
 

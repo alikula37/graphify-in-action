@@ -1,57 +1,90 @@
-# 🧠 Graphify in Action — Bu Projede Gerçek Etki
+# 🧠 graphify-in-action
 
-> **7.580 satırlık bir projeyi, sorgu başına 1.694 token ile yönetmek.**
-> Hepsi ölçülmüş gerçek rakamlar — uydurma yok. 🧪
+**A measured case study: 97.6% fewer tokens by querying a knowledge graph instead of re-reading 7,580 lines of code.**
 
-![Akış](assets/flow.svg)
+> Every number here was measured on a real project (2026-08-16, `graphify 0.9.43`). No estimates, no marketing — just data. 🧪
 
-## 🚀 Çarpıcı Rakamlar (ölçüldü: 2026-08-16)
+**Read this in other languages:** 🇹🇷 [Türkçe](README.tr.md)
 
-| 🏆 | Rakam | Ne anlama geliyor? |
-|---|---|---|
-| 📉 | **%97,6 daha az token** | Kod 71.802 token; tek sorgu yanıtı **1.694 token** (cl100k_base ile ölçüldü) |
-| 🚫 | **0 API çağrısı · 0 ₺ maliyet** | Tree-sitter yerel parse, tamamen offline |
-| ✅ | **%100 doğru ekstraksiyon** | %0 belirsiz; 931 kenardan yalnızca 4'ü çıkarımsal (%0,4) |
-| ⏱️ | **~2 dakikada cevap** | Ajan, doğru dosyalara sorguyla yönlenir |
-| 🗺️ | **562 node · 931 kenar · 599 KB** | Tüm kod haritası tek dosyada |
-| 🧠 | **12 hafızadan 11'i işe yaradı** | Sistem öğrenir, çıkmazları tekrar aramaz |
-
-## 🎯 "Kur, ama sadece işe yararsa" — Cevabı (ölçümle)
-
-Kurulumdan önce sorulan kriter şuydu: *"graphify işe yaramazsa, okuma/token/context
-kullanımımı olumsuz etkiliyorsa veya kötüye götürüyorsa kurma."* İşte ölçülmüş cevap:
-
-| Kriter | Ölçüm | Sonuç |
-|---|---|---|
-| 💨 **Verimlilik** | Kod tabanı **71.802 token** → sorgu başına **1.694 token** | **%97,6 daha az token** |
-| 🎯 **Hatasız çalışma** | Ekstraksiyon **%100 extracted · %0 ambiguous**; çıkarımsal kenar %0,4 (güven 0,8) | Deterministik — LLM yok, halüsinasyon kaynağı yok |
-| 💸 **Maliyet** | **0 API çağrısı**, API key gerekmez | Tamamen offline |
-| 🧠 **Öğrenme** | 12 sorgu anısı: **11'i işe yaradı**, 1'i çıkmaz işaretlendi | Çıkmaz bir daha taranmaz |
-
-### 🔬 vs "Kodu olduğu gibi vermek" (freetext)
-
-| | Kodu olduğu gibi yapıştırmak | Graphify sorgusu |
-|---|---|---|
-| Token | **71.802 token** (tüm kod) — 128K pencereye sığar ama soru/analiz payı kalmaz; `graph.json` **167.202 token** ile hiç sığmaz | **1.694 token** — aynı pencereye **~75 kez** sığar |
-| İlişki bilgisi | Yok — ajan "kim kimi çağırıyor?"yu her seferinde **sıfırdan** çıkarmak zorunda | **931 kenar** önceden hesaplı, sorguyla hazır gelir |
-| Yanıt süresi | Büyük bağlamda yavaşlar, yanlış dosyaya kayabilir | Odaklı alt graf → doğru dosya, saniyeler |
-
-## 📂 İçindekiler
-
-| Dosya | İçerik |
-|---|---|
-| `docs/01-kurulum-rehberi.md` | 🔧 Graphify kurulumu ve günlük kullanım kılavuzu |
-| `docs/02-gercek-etki.md` | 📊 Tüm ölçümler + örnek akışlar (teknik detay) |
-| `docs/03-karsilastirma.md` | ⚖️ Graphify vs muadilleri — tarafsız artı/eksi tablosu |
-| `index.html` | 🎨 Vakti olmayanlar için eğlenceli özet sayfa (tarayıcıda aç) |
-
-## 📖 Daha Fazlası
-
-- Teknik detay ve tüm ölçümler: [`docs/02-gercek-etki.md`](docs/02-gercek-etki.md)
-- Tarafsız karşılaştırma: [`docs/03-karsilastirma.md`](docs/03-karsilastirma.md)
-- Kurulum ve kullanım rehberi: [`docs/01-kurulum-rehberi.md`](docs/01-kurulum-rehberi.md)
-- Eğlenceli özet: `index.html` 📺
+![Flow](assets/flow.svg)
 
 ---
 
-*Kaynak proje: [Critic Forecast](https://github.com/alikula37/critic-forecast) — çok modelli finansal tahminleme platformu (private).*
+## TL;DR
+
+- [graphify](https://github.com/Graphify-Labs/graphify) turns a codebase into a **queryable knowledge graph** — code is parsed locally with tree-sitter AST, no LLM, nothing leaves your machine.
+- On a 67-file / 7,580-line / 71,802-token codebase, one `graphify query` returned a **1,694-token** subgraph — **97.6% less** context.
+- The graph also **learns**: 12 saved queries → 11 useful, 1 dead-end flagged so it is never repeated.
+
+## 🚀 Measured impact (2026-08-16, graphify 0.9.43)
+
+| Metric | Value | Meaning |
+|---|---|---|
+| 📉 **Token reduction** | **97.6%** | Code 71,802 tokens → single query **1,694 tokens** (cl100k_base) |
+| ✅ **Extraction quality** | **100% extracted · 0% ambiguous** | 4/931 edges inferred (0.4%) — deterministic, no LLM |
+| 💸 **Cost** | **0 API calls · $0** | tree-sitter local parse, fully offline |
+| 🗺️ **Graph size** | **562 nodes · 931 edges · 599 KB** | The whole code map in one file |
+| 🧠 **Memory** | **12 queries → 11 useful · 1 dead-end** | The system learns, dead-ends aren't re-scanned |
+| ⏱️ **Answer time** | **~2 min** | Agent reaches the right files via a scoped query |
+
+## 🎯 "Install it, but only if it helps" — answered with data
+
+The install criterion was: *"if graphify doesn't help, or worsens token/context usage, don't install it."* Here is the measured answer:
+
+| Criterion | Measurement | Result |
+|---|---|---|
+| 💨 **Efficiency** | 71,802 tokens of code → **1,694 tokens** per query | **97.6% fewer tokens** |
+| 🎯 **Error-free** | **100% extracted · 0% ambiguous**; inferred edges 0.4% (confidence 0.8) | Deterministic — no LLM, no hallucination source |
+| 💸 **Cost** | **0 API calls**, no API key required for code | Fully offline |
+| 🧠 **Learning** | 12 saved queries: **11 useful**, 1 dead-end flagged | Dead-ends aren't re-scanned |
+
+### 🔬 vs pasting the whole codebase (freetext)
+
+| | Pasting the whole code | A graphify query |
+|---|---|---|
+| **Tokens** | **71,802 tokens** — fits a 128K window but leaves no room for instructions/analysis; `graph.json` at **167,202 tokens** does not fit at all | **1,694 tokens** — fits **~75×** in the same window |
+| **Relationships** | None — the agent must derive "who calls whom" from scratch every time | **931 edges** pre-computed, delivered by the query |
+| **Latency / drift** | Slows down in large contexts, can drift to the wrong file | Focused subgraph → the right file, in seconds |
+
+## 🌐 What is graphify?
+
+graphify is an open-source tool ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC) that maps code, docs, PDFs, images, and video into a knowledge graph you **query instead of grepping**.
+
+- **Code maps for free, fully local** — tree-sitter AST, deterministic, no LLM, nothing leaves your machine.
+- **Every edge is explained** — tagged `EXTRACTED` or `INFERRED` so you know what was read vs. derived.
+- **Not a vector index** — a real graph: `query`, `path`, `explain`.
+- Works in **20+ assistants** (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
+
+**graphify's own published benchmarks** ([BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)):
+
+| Benchmark | Metric | graphify |
+|---|---|---|
+| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
+| LongMemEval-S (n=50) | QA accuracy | **76%** (tied with dense RAG) |
+| Graph build | LLM credits | **0** |
+
+> 📦 Official package: `graphifyy` on PyPI (CLI: `graphify`) · https://graphify.com · This repo is an **independent case study**, not affiliated with graphify.
+
+## 📂 What's in this repo
+
+| | English | Türkçe |
+|---|---|---|
+| 📊 All measurements + real flows | [docs/en/02-real-impact.md](docs/en/02-real-impact.md) | [docs/tr/02-gercek-etki.md](docs/tr/02-gercek-etki.md) |
+| 🔧 Install & daily usage guide | [docs/en/01-installation-guide.md](docs/en/01-installation-guide.md) | [docs/tr/01-kurulum-rehberi.md](docs/tr/01-kurulum-rehberi.md) |
+| ⚖️ Neutral comparison vs alternatives | [docs/en/03-comparison.md](docs/en/03-comparison.md) | [docs/tr/03-karsilastirma.md](docs/tr/03-karsilastirma.md) |
+| 🎨 Fun summary page (browser) | `index.html` (TR/EN toggle) | `index.html` (TR/EN düğmesi) |
+
+## 🚀 Get started (30 seconds)
+
+```bash
+uv tool install graphifyy        # or: pipx install graphifyy
+graphify install --project --strict
+```
+
+Then, in your AI assistant, run `/graphify .` — you get three files (`graph.html`, `GRAPH_REPORT.md`, `graph.json`).
+
+For a **one-step AI-agent install prompt** (with the "install only if it helps" decision criterion baked in), see the [installation guide](docs/en/01-installation-guide.md).
+
+---
+
+*Source project: [Critic Forecast](https://github.com/alikula37/critic-forecast) — a multi-model financial forecasting platform (private). Measured with graphify 0.9.43 (current at time of writing: 0.9.45).*

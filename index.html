@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🧠 Graphify Bu Projeyi Nasıl Hızlandırdı?</title>
+<title>🧠 Graphify in Action</title>
 <style>
   :root { --bg:#0b1f1e; --card:#0e3f3b; --card2:#0a3431; --teal:#2dd4bf; --pink:#fde9ff; --purple:#8b7cf6; --text:#c9dcda; --dim:#9fb8b5; --muted:#5f7a77; }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -34,75 +34,157 @@
   .cmp-row { display:grid; grid-template-columns:130px 1fr 1fr; gap:12px; background:var(--card); border-radius:10px; padding:12px 16px; font-size:.85rem; }
   .cmp-row .who { color:var(--pink); font-weight:600; }
   .cmp-row .pro { color:var(--teal); } .cmp-row .con { color:#ffb3c1; }
+  .langbar { text-align:center; margin-bottom:20px; }
+  .langbar button { background:rgba(45,212,191,.1); color:var(--teal); border:1px solid rgba(45,212,191,.4); border-radius:999px; padding:6px 16px; font-size:.85rem; cursor:pointer; margin:0 4px; }
+  .langbar button.active { background:var(--teal); color:#052e2b; font-weight:700; }
   @media(max-width:600px){ .cmp-row { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="langbar">
+    <button id="btn-en" onclick="setLang('en')">🇺🇸 English</button>
+    <button id="btn-tr" onclick="setLang('tr')">🇹🇷 Türkçe</button>
+  </div>
+
   <div class="hero">
-    <h1>🧠 Graphify Bu Projeyi Nasıl Hızlandırdı?</h1>
-    <div class="sub">7.580 satır kod — <b style="color:var(--teal)">sorgu başına 1.694 token</b> ile yönetildi 🌱</div>
+    <h1 data-i18n="h1"></h1>
+    <div class="sub" data-i18n="sub"></div>
     <div>
-      <span class="badge">🔒 Tamamen offline</span>
-      <span class="badge">🌳 Tree-sitter, LLM yok</span>
-      <span class="badge">🧪 Gerçek rakamlar</span>
-      <span class="badge">📐 Ölçüm: 2026-08-16</span>
+      <span class="badge" data-i18n="b1"></span>
+      <span class="badge" data-i18n="b2"></span>
+      <span class="badge" data-i18n="b3"></span>
+      <span class="badge" data-i18n="b4"></span>
     </div>
   </div>
 
   <div class="grid">
-    <div class="card"><h3>📏 Kod tabanı</h3><div class="big">7.580 <span>satır</span></div><div class="mini">67 dosya · 71.802 token (Python + TypeScript)</div></div>
-    <div class="card"><h3>🗺️ Kod grafi</h3><div class="big">562 <span>node</span></div><div class="mini">931 kenar · 44 topluluk · 599 KB</div></div>
-    <div class="card"><h3>🎯 Sorgu başına</h3><div class="big">1.694 <span>token</span></div><div class="mini">kodun %2,4'ü — %97,6 azalma</div></div>
-    <div class="card"><h3>🧠 Hafıza</h3><div class="big">12 <span>anı</span></div><div class="mini">11 işe yaradı · 1 çıkmaz öğrenildi</div></div>
+    <div class="card"><h3 data-i18n="c1"></h3><div class="big">7.580 <span data-i18n="u_lines"></span></div><div class="mini" data-i18n="c1m"></div></div>
+    <div class="card"><h3 data-i18n="c2"></h3><div class="big">562 <span data-i18n="u_nodes"></span></div><div class="mini" data-i18n="c2m"></div></div>
+    <div class="card"><h3 data-i18n="c3"></h3><div class="big">1.694 <span data-i18n="u_tokens"></span></div><div class="mini" data-i18n="c3m"></div></div>
+    <div class="card"><h3 data-i18n="c4"></h3><div class="big">12 <span data-i18n="u_mem"></span></div><div class="mini" data-i18n="c4m"></div></div>
   </div>
 
   <div class="grid">
     <div class="card">
-      <h3>💾 Tüm bilgi vs tek sorgu</h3>
-      <div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="mini">71.802 token — tüm kod</div>
-      <div class="bar-wrap"><div class="bar" style="width:2.4%"></div></div><div class="mini">1.694 token — tek sorgu (kodun %2,4'ü) 🎯</div>
+      <h3 data-i18n="c5"></h3>
+      <div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="mini" data-i18n="c5a"></div>
+      <div class="bar-wrap"><div class="bar" style="width:2.4%"></div></div><div class="mini" data-i18n="c5b"></div>
     </div>
     <div class="card">
-      <h3>🔬 Ekstraksiyon kalitesi</h3>
-      <div class="big">%100 <span>extracted</span></div>
-      <div class="mini">✓ 4/931 kenar çıkarımsal (%0.4) · güven 0.8</div>
-      <div class="mini">✓ 0 API çağrısı, 0 token maliyeti</div>
+      <h3 data-i18n="c6"></h3>
+      <div class="big">%100 <span data-i18n="u_extr"></span></div>
+      <div class="mini" data-i18n="c6a"></div>
+      <div class="mini" data-i18n="c6b"></div>
     </div>
     <div class="card">
-      <h3>🏆 God node'lar (çekirdek)</h3>
-      <div class="mini">📍 predict() — 24 kenar</div>
-      <div class="mini">📍 get_conn() — 21 kenar</div>
-      <div class="mini">📍 _post() — 19 kenar</div>
-      <div class="mini">📍 build_critic_state() — 13 kenar</div>
+      <h3 data-i18n="c7"></h3>
+      <div class="mini" data-i18n="c7a"></div>
+      <div class="mini" data-i18n="c7b"></div>
+      <div class="mini" data-i18n="c7c"></div>
+      <div class="mini" data-i18n="c7d"></div>
     </div>
   </div>
 
   <div class="flow">
-    <h3 style="color:var(--pink); margin-bottom:12px;">🧭 Ajan nasıl yönleniyor?</h3>
-    <img src="assets/flow.svg" alt="Graphify akış diyagramı">
+    <h3 style="color:var(--pink); margin-bottom:12px;" data-i18n="flow_h"></h3>
+    <img id="flow-img" src="assets/flow.svg" alt="Graphify flow diagram">
   </div>
 
   <div class="steps">
-    <div class="step"><div class="n">1️⃣</div><div><b>Kurulum:</b> <code>graphify install --project --strict</code> — strict mod, ajanın ham kaynak taramasını bloklayıp doğrudan grafa yönlendirir, sonra tekrar yönlendirmeye döner (takılmaz).</div></div>
-    <div class="step"><div class="n">2️⃣</div><div><b>Çıkmaz öğrenildi:</b> "settings sayfası" sorgusu → graf bu sayfayı bizim projede bulamadı → <span class="no">dead end</span> işaretlendi → bir daha aynı yola girilmiyor. Gerçek cevap tek sorguda: <b>8080 = eski proje, bizim UI 8081</b>.</div></div>
-    <div class="step"><div class="n">3️⃣</div><div><b>Hata ayıklama hızı:</b> backfill kuyruğu takılması (6 katmanlı hata), QRA köşe çözümü, SOL/GLD'nin 31 saniyelik veri çekişi — hepsinde <code>query/path</code> ile doğru dosyaya tek adımda ulaşıldı.</div></div>
-    <div class="step"><div class="n">4️⃣</div><div><b>Ders çıkarma:</b> <code>save-result</code> + <code>reflect</code> → <span class="ok">qra.py 3× · jobs.py 2×</span> "güvenilir kaynak" listesinde; sonraki oturumlar önce oraya bakıyor.</div></div>
-    <div class="step"><div class="n">5️⃣</div><div><b>Bayat bilgi koruması:</b> kod değişince ilgili derse <b>"yeniden doğrula"</b> bayrağı basılıyor — eski bilgiyle yanlış yönlendirme olmuyor.</div></div>
+    <div class="step"><div class="n">1️⃣</div><div><b data-i18n="s1t"></b><span data-i18n="s1"></span></div></div>
+    <div class="step"><div class="n">2️⃣</div><div><b data-i18n="s2t"></b><span data-i18n="s2"></span></div></div>
+    <div class="step"><div class="n">3️⃣</div><div><b data-i18n="s3t"></b><span data-i18n="s3"></span></div></div>
+    <div class="step"><div class="n">4️⃣</div><div><b data-i18n="s4t"></b><span data-i18n="s4"></span></div></div>
+    <div class="step"><div class="n">5️⃣</div><div><b data-i18n="s5t"></b><span data-i18n="s5"></span></div></div>
   </div>
 
   <div class="cmp">
-    <h3 style="color:var(--pink); margin-bottom:10px;">⚖️ Kısa karşılaştırma (detay: docs/03-karsilastirma.md)</h3>
-    <div class="cmp-row"><span class="who">grep / ripgrep</span><span class="pro">✅ her yerde var, anlık</span><span class="con">❌ ilişki yok, ajan için bağlam yok</span></div>
-    <div class="cmp-row"><span class="who">IDE + LSP</span><span class="pro">✅ insan için harika gezinme</span><span class="con">❌ ajan için programatik bağlam yok</span></div>
-    <div class="cmp-row"><span class="who">Sourcegraph</span><span class="pro">✅ kurumsal, dev repo</span><span class="con">❌ ağır sunucu, offline değil</span></div>
-    <div class="cmp-row"><span class="who">CodeQL/Semgrep</span><span class="pro">✅ gerçek güvenlik analizi</span><span class="con">❌ kural yazımı şart, gezinme değil</span></div>
-    <div class="cmp-row"><span class="who">Graphify</span><span class="pro">✅ offline AST graf + bellek + ajan-first</span><span class="con">❌ AST sınırı, doküman için API key, gitignore disiplini şart</span></div>
+    <h3 style="color:var(--pink); margin-bottom:10px;" data-i18n="cmp_h"></h3>
+    <div class="cmp-row"><span class="who">grep / ripgrep</span><span class="pro" data-i18n="cmp1p"></span><span class="con" data-i18n="cmp1c"></span></div>
+    <div class="cmp-row"><span class="who">IDE + LSP</span><span class="pro" data-i18n="cmp2p"></span><span class="con" data-i18n="cmp2c"></span></div>
+    <div class="cmp-row"><span class="who">Sourcegraph</span><span class="pro" data-i18n="cmp3p"></span><span class="con" data-i18n="cmp3c"></span></div>
+    <div class="cmp-row"><span class="who">CodeQL/Semgrep</span><span class="pro" data-i18n="cmp4p"></span><span class="con" data-i18n="cmp4c"></span></div>
+    <div class="cmp-row"><span class="who">Graphify</span><span class="pro" data-i18n="cmp5p"></span><span class="con" data-i18n="cmp5c"></span></div>
   </div>
 
-  <div class="note">⚠️ <b>Dürüstlük notu:</b> Tüm rakamlar bu projede ölçüldü (graphify 0.9.43, 2026-08-16). "Token tasarrufu" yüzdeleri okunacak metin boyutunun sorgu çıktısına oranıdır (satır başı ~50 bayt varsayımı) — gerçek tasarruf ajanın okuma davranışına göre değişir. Kesin ölçümler: satır/node/kenar sayıları, dosya boyutları, sorgu çıktısı boyutu.</div>
+  <div class="note" data-i18n="honest"></div>
 
-  <footer>🧠 Graphify-in-Action · kaynak proje: Critic Forecast · detaylar: <b>docs/</b> klasöründe</footer>
+  <footer data-i18n="footer"></footer>
 </div>
+
+<script>
+const I18N = {
+  en: {
+    h1: "🧠 How Graphify Sped Up This Project",
+    sub: "7,580 lines of code — managed with <b style='color:var(--teal)'>1,694 tokens per query</b> 🌱",
+    b1: "🔒 Fully offline", b2: "🌳 Tree-sitter, no LLM", b3: "🧪 Real numbers", b4: "📐 Measured: 2026-08-16",
+    c1: "📏 Codebase", u_lines: "lines", c1m: "67 files · 71,802 tokens (Python + TypeScript)",
+    c2: "🗺️ Code graph", u_nodes: "nodes", c2m: "931 edges · 44 communities · 599 KB",
+    c3: "🎯 Per query", u_tokens: "tokens", c3m: "2.4% of the code — 97.6% reduction",
+    c4: "🧠 Memory", u_mem: "memories", c4m: "11 useful · 1 dead-end learned",
+    c5: "💾 All info vs one query", c5a: "71,802 tokens — all code", c5b: "1,694 tokens — one query (2.4% of the code) 🎯",
+    c6: "🔬 Extraction quality", u_extr: "extracted", c6a: "✓ 4/931 edges inferred (0.4%) · confidence 0.8", c6b: "✓ 0 API calls, 0 token cost",
+    c7: "🏆 God nodes (core)", c7a: "📍 predict() — 24 edges", c7b: "📍 get_conn() — 21 edges", c7c: "📍 _post() — 19 edges", c7d: "📍 build_critic_state() — 13 edges",
+    flow_h: "🧭 How does the agent navigate?",
+    s1t: "Install: ", s1: "<code>graphify install --project --strict</code> — strict mode blocks the agent's raw source scan and routes it to the graph, then reverts to nudge mode (never gets stuck).",
+    s2t: "Dead-end learned: ", s2: "the \"settings page\" query → the graph couldn't find it in our project → <span class='no'>dead end</span> flagged → never re-scanned. The real answer in one query: <b>8080 = old project, our UI is 8081</b>.",
+    s3t: "Debugging speed: ", s3: "backfill queue stuck (6-layer error), QRA corner solution, SOL/GLD's 31-second fetch — all reached the right file in one step via <code>query/path</code>.",
+    s4t: "Extracting lessons: ", s4: "<code>save-result</code> + <code>reflect</code> → <span class='ok'>qra.py 3× · jobs.py 2×</span> on the \"trusted source\" list; later sessions check there first.",
+    s5t: "Stale-knowledge guard: ", s5: "when code changes, the related lesson gets a <b>\"re-verify\"</b> flag — no wrong routing from outdated info.",
+    cmp_h: "⚖️ Quick comparison (details: docs/en/03-comparison.md)",
+    cmp1p: "✅ everywhere, instant", cmp1c: "❌ no relationships, no agent context",
+    cmp2p: "✅ great for humans", cmp2c: "❌ no programmatic agent context",
+    cmp3p: "✅ enterprise, big repos", cmp3c: "❌ heavy server, not offline",
+    cmp4p: "✅ real security analysis", cmp4c: "❌ requires rules, not navigation",
+    cmp5p: "✅ offline AST graph + memory + agent-first", cmp5c: "❌ AST limits, API key for docs, gitignore discipline",
+    honest: "⚠️ <b>Honesty note:</b> All numbers were measured on this project (graphify 0.9.43, 2026-08-16). The \"token savings\" percentage is the ratio of query output to the whole codebase. Exact measurements: lines/nodes/edges, file sizes, query output size.",
+    footer: "🧠 Graphify-in-Action · source project: Critic Forecast · details in the <b>docs/</b> folder"
+  },
+  tr: {
+    h1: "🧠 Graphify Bu Projeyi Nasıl Hızlandırdı?",
+    sub: "7.580 satır kod — <b style='color:var(--teal)'>sorgu başına 1.694 token</b> ile yönetildi 🌱",
+    b1: "🔒 Tamamen offline", b2: "🌳 Tree-sitter, LLM yok", b3: "🧪 Gerçek rakamlar", b4: "📐 Ölçüm: 2026-08-16",
+    c1: "📏 Kod tabanı", u_lines: "satır", c1m: "67 dosya · 71.802 token (Python + TypeScript)",
+    c2: "🗺️ Kod grafi", u_nodes: "node", c2m: "931 kenar · 44 topluluk · 599 KB",
+    c3: "🎯 Sorgu başına", u_tokens: "token", c3m: "kodun %2,4'ü — %97,6 azalma",
+    c4: "🧠 Hafıza", u_mem: "anı", c4m: "11 işe yaradı · 1 çıkmaz öğrenildi",
+    c5: "💾 Tüm bilgi vs tek sorgu", c5a: "71.802 token — tüm kod", c5b: "1.694 token — tek sorgu (kodun %2,4'ü) 🎯",
+    c6: "🔬 Ekstraksiyon kalitesi", u_extr: "extracted", c6a: "✓ 4/931 kenar çıkarımsal (%0.4) · güven 0.8", c6b: "✓ 0 API çağrısı, 0 token maliyeti",
+    c7: "🏆 God node'lar (çekirdek)", c7a: "📍 predict() — 24 kenar", c7b: "📍 get_conn() — 21 kenar", c7c: "📍 _post() — 19 kenar", c7d: "📍 build_critic_state() — 13 kenar",
+    flow_h: "🧭 Ajan nasıl yönleniyor?",
+    s1t: "Kurulum: ", s1: "<code>graphify install --project --strict</code> — strict mod, ajanın ham kaynak taramasını bloklayıp doğrudan grafa yönlendirir, sonra tekrar yönlendirmeye döner (takılmaz).",
+    s2t: "Çıkmaz öğrenildi: ", s2: "\"settings sayfası\" sorgusu → graf bu sayfayı bizim projede bulamadı → <span class='no'>dead end</span> işaretlendi → bir daha aynı yola girilmiyor. Gerçek cevap tek sorguda: <b>8080 = eski proje, bizim UI 8081</b>.",
+    s3t: "Hata ayıklama hızı: ", s3: "backfill kuyruğu takılması (6 katmanlı hata), QRA köşe çözümü, SOL/GLD'nin 31 saniyelik veri çekişi — hepsinde <code>query/path</code> ile doğru dosyaya tek adımda ulaşıldı.",
+    s4t: "Ders çıkarma: ", s4: "<code>save-result</code> + <code>reflect</code> → <span class='ok'>qra.py 3× · jobs.py 2×</span> \"güvenilir kaynak\" listesinde; sonraki oturumlar önce oraya bakıyor.",
+    s5t: "Bayat bilgi koruması: ", s5: "kod değişince ilgili derse <b>\"yeniden doğrula\"</b> bayrağı basılıyor — eski bilgiyle yanlış yönlendirme olmuyor.",
+    cmp_h: "⚖️ Kısa karşılaştırma (detay: docs/tr/03-karsilastirma.md)",
+    cmp1p: "✅ her yerde var, anlık", cmp1c: "❌ ilişki yok, ajan için bağlam yok",
+    cmp2p: "✅ insan için harika gezinme", cmp2c: "❌ ajan için programatik bağlam yok",
+    cmp3p: "✅ kurumsal, dev repo", cmp3c: "❌ ağır sunucu, offline değil",
+    cmp4p: "✅ gerçek güvenlik analizi", cmp4c: "❌ kural yazımı şart, gezinme değil",
+    cmp5p: "✅ offline AST graf + bellek + ajan-first", cmp5c: "❌ AST sınırı, doküman için API key, gitignore disiplini şart",
+    honest: "⚠️ <b>Dürüstlük notu:</b> Tüm rakamlar bu projede ölçüldü (graphify 0.9.43, 2026-08-16). \"Token tasarrufu\" yüzdeleri, sorgu çıktısının tüm kod tabanına oranıdır. Kesin ölçümler: satır/node/kenar sayıları, dosya boyutları, sorgu çıktısı boyutu.",
+    footer: "🧠 Graphify-in-Action · kaynak proje: Critic Forecast · detaylar: <b>docs/</b> klasöründe"
+  }
+};
+
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  const d = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (d[k] !== undefined) el.innerHTML = d[k];
+  });
+  document.getElementById('flow-img').src = lang === 'tr' ? 'assets/flow.tr.svg' : 'assets/flow.svg';
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+  try { localStorage.setItem('gf-lang', lang); } catch(e) {}
+}
+
+const saved = (function(){ try { return localStorage.getItem('gf-lang'); } catch(e) { return null; } })();
+const preferred = saved || ((navigator.language || '').toLowerCase().startsWith('tr') ? 'tr' : 'en');
+setLang(preferred);
+</script>
 </body>
 </html>

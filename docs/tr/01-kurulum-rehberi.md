@@ -1,5 +1,7 @@
 # 🔧 Graphify Kurulum ve Kullanım Rehberi
 
+🇺🇸 [English version](../en/01-installation-guide.md)
+
 Bu kılavuz, bir projeye graphify'ı nasıl kurup etkin kullanacağını adım adım anlatır.
 Amacı tek cümlede: **kod tabanını her oturumda baştan taramadan**, ajanın (LLM asistanın)
 **token/context kullanımını azaltarak** hızlı ve doğru çalışmasını sağlamak.

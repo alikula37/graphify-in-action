@@ -1,5 +1,7 @@
 # 📊 Graphify'in Bu Projede Gerçek Etki
 
+🇺🇸 [English version](../en/02-real-impact.md)
+
 > Tüm rakamlar **ölçüldü** (2026-08-16, `graphify 0.9.43`) — tahmin veya uydurma yok.
 > Token ölçümleri `cl100k_base` tokenizer ile yapıldı; dosya seti `node_modules`/`dist`
 > hariç kaynak kod (`services/` altındaki `.py` + `.ts` + `.tsx`).
