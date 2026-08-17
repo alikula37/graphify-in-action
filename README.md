@@ -10,10 +10,21 @@
 
 ---
 
+## 🌐 What is graphify?
+
+graphify is an open-source tool ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC) that maps code, docs, PDFs, images, and video into a knowledge graph you **query instead of grepping**.
+
+- **Code maps for free, fully local** — tree-sitter AST, deterministic, no LLM, nothing leaves your machine.
+- **Every edge is explained** — tagged `EXTRACTED` or `INFERRED` so you know what was read vs. derived.
+- **Not a vector index** — a real graph: `query`, `path`, `explain`.
+- Works in **20+ assistants** (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
+
+> 📦 Official package: `graphifyy` on PyPI (CLI: `graphify`) · https://graphify.com · This repo is an **independent case study**, not affiliated with graphify.
+
 ## TL;DR
 
-- [graphify](https://github.com/Graphify-Labs/graphify) turns a codebase into a **queryable knowledge graph** — code is parsed locally with tree-sitter AST, no LLM, nothing leaves your machine.
 - On a 67-file / 7,580-line / 71,802-token codebase, one `graphify query` returned a **1,694-token** subgraph — **97.6% less** context.
+- Extraction is **100% deterministic** (tree-sitter AST, no LLM) — **0 API calls**, fully offline.
 - The graph also **learns**: 12 saved queries → 11 useful, 1 dead-end flagged so it is never repeated.
 
 ## 🚀 Measured impact (2026-08-16, graphify 0.9.43)
@@ -26,6 +37,16 @@
 | 🗺️ **Graph size** | **562 nodes · 931 edges · 599 KB** | The whole code map in one file |
 | 🧠 **Memory** | **12 queries → 11 useful · 1 dead-end** | The system learns, dead-ends aren't re-scanned |
 | ⏱️ **Answer time** | **~2 min** | Agent reaches the right files via a scoped query |
+
+#### graphify's own published benchmarks
+
+| Benchmark | Metric | graphify |
+|---|---|---|
+| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
+| LongMemEval-S (n=50) | QA accuracy | **76%** (tied with dense RAG) |
+| Graph build | LLM credits | **0** |
+
+*Source: [graphify BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)*
 
 ## 🎯 "Install it, but only if it helps" — answered with data
 
@@ -45,25 +66,6 @@ The install criterion was: *"if graphify doesn't help, or worsens token/context 
 | **Tokens** | **71,802 tokens** — fits a 128K window but leaves no room for instructions/analysis; `graph.json` at **167,202 tokens** does not fit at all | **1,694 tokens** — fits **~75×** in the same window |
 | **Relationships** | None — the agent must derive "who calls whom" from scratch every time | **931 edges** pre-computed, delivered by the query |
 | **Latency / drift** | Slows down in large contexts, can drift to the wrong file | Focused subgraph → the right file, in seconds |
-
-## 🌐 What is graphify?
-
-graphify is an open-source tool ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC) that maps code, docs, PDFs, images, and video into a knowledge graph you **query instead of grepping**.
-
-- **Code maps for free, fully local** — tree-sitter AST, deterministic, no LLM, nothing leaves your machine.
-- **Every edge is explained** — tagged `EXTRACTED` or `INFERRED` so you know what was read vs. derived.
-- **Not a vector index** — a real graph: `query`, `path`, `explain`.
-- Works in **20+ assistants** (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
-
-**graphify's own published benchmarks** ([BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)):
-
-| Benchmark | Metric | graphify |
-|---|---|---|
-| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
-| LongMemEval-S (n=50) | QA accuracy | **76%** (tied with dense RAG) |
-| Graph build | LLM credits | **0** |
-
-> 📦 Official package: `graphifyy` on PyPI (CLI: `graphify`) · https://graphify.com · This repo is an **independent case study**, not affiliated with graphify.
 
 ## 📂 What's in this repo
 

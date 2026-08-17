@@ -10,10 +10,21 @@
 
 ---
 
+## 🌐 graphify nedir?
+
+graphify, kodu, dokümanı, PDF'i, görseli ve videoyu **grep yerine sorguladığınız** bir bilgi grafına çeviren açık kaynak bir araçtır ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC).
+
+- **Kod haritası ücretsiz, tamamen yerel** — tree-sitter AST, deterministik, LLM yok, makinenizden hiçbir şey çıkmaz.
+- **Her kenar açıklanır** — `EXTRACTED` veya `INFERRED` etiketiyle: okunan mı türetilen mi belli olur.
+- **Bir vektör indeksi değil** — gerçek bir graf: `query`, `path`, `explain`.
+- **20+ asistan** destekli (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
+
+> 📦 Resmi paket: PyPI'de `graphifyy` (CLI: `graphify`) · https://graphify.com · Bu repo **bağımsız bir vaka çalışmasıdır**, graphify ile bağlantılı değildir.
+
 ## TL;DR
 
-- [graphify](https://github.com/Graphify-Labs/graphify), bir kod tabanını **sorgulanabilir bilgi grafına** çevirir — kod yerel olarak tree-sitter AST ile parse edilir, LLM yok, makinenizden hiçbir şey çıkmaz.
 - 67 dosyalık / 7.580 satırlık / 71.802 token'lık bir kod tabanında tek bir `graphify query` **1.694 token'lık** alt graf döndürdü — **%97,6 daha az** bağlam.
+- Ekstraksiyon **%100 deterministik** (tree-sitter AST, LLM yok) — **0 API çağrısı**, tamamen offline.
 - Graf ayrıca **öğrenir**: 12 kayıtlı sorgu → 11'i işe yaradı, 1 çıkmaz işaretlendi ve bir daha tekrarlanmıyor.
 
 ## 🚀 Ölçülen etki (2026-08-16, graphify 0.9.43)
@@ -26,6 +37,16 @@
 | 🗺️ **Graf boyutu** | **562 node · 931 kenar · 599 KB** | Tüm kod haritası tek dosyada |
 | 🧠 **Bellek** | **12 sorgu → 11 useful · 1 dead-end** | Sistem öğrenir, çıkmazlar tekrar taranmaz |
 | ⏱️ **Cevap süresi** | **~2 dk** | Ajan, odaklı sorguyla doğru dosyalara ulaşır |
+
+#### graphify'nin kendi yayınladığı benchmark'lar
+
+| Benchmark | Metrik | graphify |
+|---|---|---|
+| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
+| LongMemEval-S (n=50) | QA doğruluğu | **%76** (dense RAG ile eşit) |
+| Graf oluşturma | LLM kredisi | **0** |
+
+*Kaynak: [graphify BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)*
 
 ## 🎯 "Kur, ama sadece işe yararsa" — veriyle cevabı
 
@@ -45,25 +66,6 @@ Kurulum kriteri şuydu: *"graphify işe yaramazsa ya da token/context kullanım�
 | **Token** | **71.802 token** — 128K pencereye sığar ama talimat/analiz payı kalmaz; `graph.json` **167.202 token** ile hiç sığmaz | **1.694 token** — aynı pencereye **~75 kez** sığar |
 | **İlişki bilgisi** | Yok — ajan "kim kimi çağırıyor"u her seferinde sıfırdan çıkarmak zorunda | **931 kenar** önceden hesaplı, sorguyla hazır gelir |
 | **Gecikme / sapma** | Büyük bağlamda yavaşlar, yanlış dosyaya kayabilir | Odaklı alt graf → doğru dosya, saniyeler |
-
-## 🌐 graphify nedir?
-
-graphify, kodu, dokümanı, PDF'i, görseli ve videoyu **grep yerine sorguladığınız** bir bilgi grafına çeviren açık kaynak bir araçtır ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), 100k+ ★, YC).
-
-- **Kod haritası ücretsiz, tamamen yerel** — tree-sitter AST, deterministik, LLM yok, makinenizden hiçbir şey çıkmaz.
-- **Her kenar açıklanır** — `EXTRACTED` veya `INFERRED` etiketiyle: okunan mı türetilen mi belli olur.
-- **Bir vektör indeksi değil** — gerçek bir graf: `query`, `path`, `explain`.
-- **20+ asistan** destekli (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, OpenCode, Aider, …).
-
-**graphify'nin kendi yayınladığı benchmark'lar** ([BENCHMARKS.md](https://github.com/Graphify-Labs/graphify/blob/v8/BENCHMARKS.md)):
-
-| Benchmark | Metrik | graphify |
-|---|---|---|
-| LOCOMO (n=300) | recall@10 | **0.497** (mem0 0.048, supermemory 0.149) |
-| LongMemEval-S (n=50) | QA doğruluğu | **%76** (dense RAG ile eşit) |
-| Graf oluşturma | LLM kredisi | **0** |
-
-> 📦 Resmi paket: PyPI'de `graphifyy` (CLI: `graphify`) · https://graphify.com · Bu repo **bağımsız bir vaka çalışmasıdır**, graphify ile bağlantılı değildir.
 
 ## 📂 Bu repoda ne var?
 
