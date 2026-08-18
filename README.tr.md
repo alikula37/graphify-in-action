@@ -1,6 +1,6 @@
 # 🧠 graphify-in-action
 
-**Ölçülmüş bir vaka çalışması: 7.580 satır kodu yeniden okumak yerine bir bilgi grafını sorgulayarak %97,6 daha az token.**
+**Ölçülmüş bir vaka çalışması: bir soruyu yanıtlamak için %82–90 daha az bağlam — ilgili kaynak dosyaları yeniden okumak yerine bir bilgi grafını sorgulayarak.**
 
 > Buradaki her rakam gerçek bir projede ölçüldü (2026-08-16, `graphify 0.9.43`). Tahmin yok, pazarlama yok — sadece veri. 🧪
 
@@ -19,7 +19,7 @@ graphify kodunuzu okur ve **haritasını** çıkarır — hangi dosyanın hangis
 *graphify ile haritalanmış FastAPI kod tabanı — her düğüm bir kavram, renkler topluluklar. (Görsel: graphify, Apache-2.0)*
 
 - **Bir dosya yığını değil, bir harita.** "Kim kimi çağırıyor"u önceden çizer; ilişkiler hazırdır — ajan her seferinde sıfırdan çıkarmaz.
-- **Haritaya bak, her sokağı gezme.** Tek sorgu, tüm kod tabanını yeniden okumak (~71,8K token) yerine küçük ve ilgili bir dilim döndürür (~1,7K token).
+- **Haritaya bak, her sokağı gezme.** Tek sorgu, ajanın grafsız grep'leyip okuyacağı dosyaları (~9,6K–16,8K token) yeniden okumak yerine küçük ve ilgili bir dilim (**1.694 token**) döndürür.
 - **Yerel, ücretsiz, offline.** Makinenizde **0 API çağrısıyla** kurulur — anahtar yok, veriniz bilgisayarınızdan çıkmaz.
 
 <img src="assets/demo-path.png" alt="graphify path sorgusu çıktısı — iki kavram arasındaki en kısa yol, adım adım" width="720">
@@ -32,7 +32,7 @@ graphify açık kaynaktır ([Graphify-Labs/graphify](https://github.com/Graphify
 
 ## TL;DR
 
-- 67 dosyalık / 7.580 satırlık / 71.802 token'lık bir kod tabanında tek bir `graphify query` **1.694 token'lık** alt graf döndürdü — **%97,6 daha az** bağlam.
+- Tek bir `graphify query` **1.694 token'lık** ilişki haritası döndürdü. Aynı soruyu graphify olmadan yanıtlamak, ilgili dosyaları grep'leyip okumak demek — **9.636–16.842 token** (5,7×–10× daha fazla).
 - Ekstraksiyon **%100 deterministik** (tree-sitter AST, LLM yok) — **0 API çağrısı**, tamamen offline.
 - Graf ayrıca **öğrenir**: 12 kayıtlı sorgu → 11'i işe yaradı, 1 çıkmaz işaretlendi ve bir daha tekrarlanmıyor.
 
@@ -40,7 +40,7 @@ graphify açık kaynaktır ([Graphify-Labs/graphify](https://github.com/Graphify
 
 | Metrik | Değer | Anlamı |
 |---|---|---|
-| 📉 **Token azalması** | **%97,6** | Kod 71.802 token → tek sorgu **1.694 token** (cl100k_base) |
+| 📉 **Bağlam azalması** | **%82–90** | Aynı soru: **1.694 token** (graphify) vs **9.636–16.842 token** (ajanın grafsız okuyacağı dosyalar) |
 | ✅ **Ekstraksiyon kalitesi** | **%100 extracted · %0 ambiguous** | 931 kenarın 4'ü çıkarımsal (%0,4) — deterministik, LLM yok |
 | 💸 **Maliyet** | **0 API çağrısı · 0 ₺** | tree-sitter yerel parse, tamamen offline |
 | 🗺️ **Graf boyutu** | **562 node · 931 kenar · 44 topluluk · 599 KB** | Tüm kod haritası tek dosyada |
@@ -53,17 +53,17 @@ Kurulum kriteri şuydu: *"graphify işe yaramazsa ya da token/context kullanım�
 
 | Kriter | Ölçüm | Sonuç |
 |---|---|---|
-| 💨 **Verimlilik** | 71.802 token kod → sorgu başına **1.694 token** | **%97,6 daha az token** |
+| 💨 **Verimlilik** | 9.636–16.842 token (ajanın grafsız okuyacağı dosyalar) → sorgu başına **1.694 token** | **%82–90 daha az bağlam** |
 | 🎯 **Hatasız çalışma** | **%100 extracted · %0 ambiguous**; çıkarımsal kenar %0,4 (güven 0,8) | Deterministik — LLM yok, halüsinasyon kaynağı yok |
 | 💸 **Maliyet** | **0 API çağrısı**, kod için API key gerekmez | Tamamen offline |
 | 🧠 **Öğrenme** | 12 kayıtlı sorgu: **11 useful**, 1 çıkmaz işaretli | Çıkmazlar tekrar taranmaz |
 
-### 🔬 vs kodu olduğu gibi yapıştırmak (freetext)
+### 🔬 vs aynı soruyu graphify olmadan yanıtlamak
 
-| | Kodu olduğu gibi yapıştırmak | Graphify sorgusu |
+| | Graphify olmadan (grep + oku) | Graphify sorgusu |
 |---|---|---|
-| **Token** | **71.802 token** — 128K pencereye sığar ama talimat/analiz payı kalmaz; `graph.json` **167.202 token** ile hiç sığmaz | **1.694 token** — aynı pencereye **~75 kez** sığar |
-| **İlişki bilgisi** | Yok — ajan "kim kimi çağırıyor"u her seferinde sıfırdan çıkarmak zorunda | **931 kenar** önceden hesaplı, sorguyla hazır gelir |
+| **Bağlam** | **9.636–16.842 token** — ajan ilişkileri çıkarmak için ilgili kaynak dosyaları grep'ler ve okur | **1.694 token** — ilişkiler önceden hesaplı, odaklı alt graf olarak gelir |
+| **İlişki bilgisi** | Her oturumda dosya okuyarak sıfırdan çıkarılır | **931 kenar** önceden hesaplı, sorguyla hazır gelir |
 | **Gecikme / sapma** | Büyük bağlamda yavaşlar, yanlış dosyaya kayabilir | Odaklı alt graf → doğru dosya, saniyeler |
 
 ## 📂 Bu repoda ne var?

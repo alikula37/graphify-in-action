@@ -76,8 +76,8 @@ graphify reflect
 | `graphify reflect` | Birikmiş dersleri derler, güvenilir/şüpheli node işaretler |
 
 > 💡 İpucu: Sorgu sonuçları genellikle ham kaynak taramasından çok daha küçük ve odaklıdır —
-> bu projede tek bir sorgu **1.694 token** alt graf döndürürken kod tabanının tamamı
-> **71.802 token** (%97,6 azalma — ölçüldü).
+> bu projede tek bir sorgu **1.694 token** alt graf döndürürken, ajanın aynı soruyu graphify
+> olmadan yanıtlamak için okuyacağı dosyalar **9.636–16.842 token** (%82–90 azalma — ölçüldü).
 
 ---
 

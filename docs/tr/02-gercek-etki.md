@@ -29,14 +29,16 @@
 
 | Metrik | Değer |
 |---|---|
-| `graphify query "forecast cone horizon ensemble"` çıktısı | **6.430 bayt · 1.694 token** |
-| Kod tabanının tamamı | 71.802 token |
-| **Token azalması** | **%97,6** (1 − 1.694 / 71.802) |
-| Bayt bazında azalma | %97,6 (6.430 bayt / 271.540 bayt) |
-| `graph.json` (tüm bilgi) | 599 KB · **167.202 token** · 562 node · 931 kenar |
+| `graphify query "forecast cone horizon ensemble"` çıktısı | **6.430 bayt · 1.694 token** (81 node) |
+| Ajanın graphify *olmadan* okuyacağı dosyalar — 6 çekirdek dosya | **9.636 token** |
+| Ajanın graphify *olmadan* okuyacağı dosyalar — 19 ilgili dosyanın tümü | **16.842 token** |
+| **Bağlam azalması** | **%82–90** (1 − 1.694 / 9.636 … 1 − 1.694 / 16.842) |
+| Tüm kod tabanı (yalnızca ölçek için) | 67 dosya · 71.802 token |
 
-> Yani: kodun tamamını okuyup ilişkileri sıfırdan çıkarmak yerine, ajan her soruya
-> **kodun ~%2,4'ü kadar** bağlamla gidiyor ve geri kalanı hazır graf üzerinden çözüyor.
+> Karşılaştırma, ajanın aynı soruyu yanıtlamak için **gerçekten okuyacağı** dosyalara karşı
+> yapıldı — tüm kod tabanına karşı değil. graphify ilişki haritasını **1.694 token**'da
+> döndürüyor; onsuz ajan ilgili dosyaları grep'leyip okumak zorunda
+> (**9.636–16.842 token**, yani 5,7×–10× daha fazla).
 
 ### Ekstraksiyon kalitesi (gerçek, GRAPH_REPORT.md'den)
 
@@ -106,7 +108,7 @@
 
 | Nerede işe yaradı | Ne kazandırdı |
 |---|---|
-| Kod taraması | 7.580 satır / 71.802 token → sorgu başına 1.694 token (**%97,6 azalma**) |
+| Kod taraması | 9.636–16.842 token (grafsız okunan dosyalar) → sorgu başına 1.694 token (**%82–90 azalma**) |
 | Settings çıkmazı | 1 dead-end işareti → aynı hataya bir daha düşülmedi |
 | Hata ayıklama | `path`/`query` ile doğru dosyaya 1 adımda ulaşma |
 | Bellek | 12 anı → 11 useful; ensemble ve job modülleri öncelikli kaynak |
@@ -114,5 +116,7 @@
 | Depolama | Tüm bilgi 599 KB `graph.json` (+ ekstrakt klasörü 3,9 MB) |
 
 > ⚠️ **Dürüstlük notu:** Tüm sayılar bu projede ölçüldü. Token sayıları `cl100k_base`
-> tokenizer ile; "azalma yüzdesi" = 1 − (sorgu token / tüm kod token). Gerçek tasarruf
-> ajanın okuma davranışına göre değişebilir; oran sabittir.
+> tokenizer ile. "Azalma yüzdesi", graphify sorgu çıktısını ajanın aynı soru için gerçekten
+> okuyacağı dosyalarla (grep + oku) karşılaştırır — tüm kod tabanıyla değil. 6 çekirdek dosya
+> (9.636 token) aralığın muhafazakâr ucu; 19 dosya (16.842 token) sorgunun işaret ettiği tüm
+> dosyalardır.

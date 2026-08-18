@@ -64,9 +64,9 @@
   → graphify.
 
 ### 🆚 Pasting the whole code into an LLM
-- **graphify +:** Pasting the whole code (71,802 tokens) fills the context and forces the
-  agent to derive relationships from scratch; graphify points the agent to the right place
-  with **1,694 tokens per query** (see `02-real-impact.md`).
+- **graphify +:** Reading the relevant files to answer a question (9,636–16,842 tokens on
+  this project) fills the context and forces the agent to derive relationships from scratch;
+  graphify points the agent to the right place with **1,694 tokens per query** (see `02-real-impact.md`).
 - **LLM full-context +:** Simple for one-off small projects; no setup.
 - **Verdict:** As the repo grows, graphify's scaling advantage becomes clear.
 

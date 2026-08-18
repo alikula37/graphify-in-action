@@ -74,8 +74,9 @@ graphify reflect
 | `graphify reflect` | Aggregates lessons, tags preferred/tentative nodes |
 
 > 💡 Tip: Query results are typically much smaller and more focused than raw source scans —
-> on this project a single query returned a **1,694-token** subgraph while the whole
-> codebase is **71,802 tokens** (97.6% reduction — measured).
+> on this project a single query returned a **1,694-token** subgraph, versus the
+> **9,636–16,842 tokens** the agent would read to answer the same question without graphify
+> (82–90% reduction — measured).
 
 ---
 

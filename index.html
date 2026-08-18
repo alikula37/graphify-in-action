@@ -69,7 +69,7 @@
     <div class="card">
       <h3 data-i18n="c5"></h3>
       <div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="mini" data-i18n="c5a"></div>
-      <div class="bar-wrap"><div class="bar" style="width:2.4%"></div></div><div class="mini" data-i18n="c5b"></div>
+      <div class="bar-wrap"><div class="bar" style="width:17.6%"></div></div><div class="mini" data-i18n="c5b"></div>
     </div>
     <div class="card">
       <h3 data-i18n="c6"></h3>
@@ -117,13 +117,13 @@
 const I18N = {
   en: {
     h1: "🧠 How Graphify Sped Up This Project",
-    sub: "7,580 lines of code — managed with <b style='color:var(--teal)'>1,694 tokens per query</b> 🌱",
+    sub: "One question — answered with <b style='color:var(--teal)'>1,694 tokens</b> instead of re-reading the relevant files 🌱",
     b1: "🔒 Fully offline", b2: "🌳 Tree-sitter, no LLM", b3: "🧪 Real numbers", b4: "📐 Measured: 2026-08-16",
     c1: "📏 Codebase", u_lines: "lines", c1m: "67 files · 71,802 tokens (Python + TypeScript)",
     c2: "🗺️ Code graph", u_nodes: "nodes", c2m: "931 edges · 44 communities · 599 KB",
-    c3: "🎯 Per query", u_tokens: "tokens", c3m: "2.4% of the code — 97.6% reduction",
+    c3: "🎯 Per query", u_tokens: "tokens", c3m: "vs reading the relevant files — 5.7×–10× less context",
     c4: "🧠 Memory", u_mem: "memories", c4m: "11 useful · 1 dead-end learned",
-    c5: "💾 All info vs one query", c5a: "71,802 tokens — all code", c5b: "1,694 tokens — one query (2.4% of the code) 🎯",
+    c5: "💾 Without graphify vs one query", c5a: "9,636–16,842 tokens — files read without graphify", c5b: "1,694 tokens — graphify query (5.7×–10× less) 🎯",
     c6: "🔬 Extraction quality", u_extr: "extracted", c6a: "✓ 4/931 edges inferred (0.4%) · confidence 0.8", c6b: "✓ 0 API calls, 0 token cost",
     c7: "🏆 God nodes (core)", c7a: "📍 core prediction fn — 24 edges", c7b: "📍 connection helper — 21 edges", c7c: "📍 request helper — 19 edges", c7d: "📍 state builder — 13 edges",
     flow_h: "🧭 How does the agent navigate?",
@@ -138,18 +138,18 @@ const I18N = {
     cmp3p: "✅ enterprise, big repos", cmp3c: "❌ heavy server, not offline",
     cmp4p: "✅ real security analysis", cmp4c: "❌ requires rules, not navigation",
     cmp5p: "✅ offline AST graph + memory + agent-first", cmp5c: "❌ AST limits, API key for docs, gitignore discipline",
-    honest: "⚠️ <b>Honesty note:</b> All numbers were measured on this project (graphify 0.9.43, 2026-08-16). The \"token savings\" percentage is the ratio of query output to the whole codebase. Exact measurements: lines/nodes/edges, file sizes, query output size.",
+    honest: "⚠️ <b>Honesty note:</b> All numbers were measured on this project (graphify 0.9.43, 2026-08-16). The reduction compares the graphify query output against the files an agent would actually read for the same question — not the whole codebase.",
     footer: "🧠 Graphify-in-Action · source project: a financial forecasting platform · details in the <b>docs/</b> folder"
   },
   tr: {
     h1: "🧠 Graphify Bu Projeyi Nasıl Hızlandırdı?",
-    sub: "7.580 satır kod — <b style='color:var(--teal)'>sorgu başına 1.694 token</b> ile yönetildi 🌱",
+    sub: "Bir soru — ilgili dosyaları yeniden okumak yerine <b style='color:var(--teal)'>1.694 token</b> ile cevaplandı 🌱",
     b1: "🔒 Tamamen offline", b2: "🌳 Tree-sitter, LLM yok", b3: "🧪 Gerçek rakamlar", b4: "📐 Ölçüm: 2026-08-16",
     c1: "📏 Kod tabanı", u_lines: "satır", c1m: "67 dosya · 71.802 token (Python + TypeScript)",
     c2: "🗺️ Kod grafi", u_nodes: "node", c2m: "931 kenar · 44 topluluk · 599 KB",
-    c3: "🎯 Sorgu başına", u_tokens: "token", c3m: "kodun %2,4'ü — %97,6 azalma",
+    c3: "🎯 Sorgu başına", u_tokens: "token", c3m: "ilgili dosyaları okumaya karşı — 5,7×–10× daha az bağlam",
     c4: "🧠 Hafıza", u_mem: "anı", c4m: "11 işe yaradı · 1 çıkmaz öğrenildi",
-    c5: "💾 Tüm bilgi vs tek sorgu", c5a: "71.802 token — tüm kod", c5b: "1.694 token — tek sorgu (kodun %2,4'ü) 🎯",
+    c5: "💾 Graphify olmadan vs tek sorgu", c5a: "9.636–16.842 token — grafsız okunan dosyalar", c5b: "1.694 token — graphify sorgusu (5,7×–10× daha az) 🎯",
     c6: "🔬 Ekstraksiyon kalitesi", u_extr: "extracted", c6a: "✓ 4/931 kenar çıkarımsal (%0.4) · güven 0.8", c6b: "✓ 0 API çağrısı, 0 token maliyeti",
     c7: "🏆 God node'lar (çekirdek)", c7a: "📍 çekirdek tahmin fn — 24 kenar", c7b: "📍 bağlantı yardımcısı — 21 kenar", c7c: "📍 istek yardımcısı — 19 kenar", c7d: "📍 state builder — 13 kenar",
     flow_h: "🧭 Ajan nasıl yönleniyor?",
@@ -164,7 +164,7 @@ const I18N = {
     cmp3p: "✅ kurumsal, dev repo", cmp3c: "❌ ağır sunucu, offline değil",
     cmp4p: "✅ gerçek güvenlik analizi", cmp4c: "❌ kural yazımı şart, gezinme değil",
     cmp5p: "✅ offline AST graf + bellek + ajan-first", cmp5c: "❌ AST sınırı, doküman için API key, gitignore disiplini şart",
-    honest: "⚠️ <b>Dürüstlük notu:</b> Tüm rakamlar bu projede ölçüldü (graphify 0.9.43, 2026-08-16). \"Token tasarrufu\" yüzdeleri, sorgu çıktısının tüm kod tabanına oranıdır. Kesin ölçümler: satır/node/kenar sayıları, dosya boyutları, sorgu çıktısı boyutu.",
+    honest: "⚠️ <b>Dürüstlük notu:</b> Tüm rakamlar bu projede ölçüldü (graphify 0.9.43, 2026-08-16). Azalma, graphify sorgu çıktısını ajanın aynı soru için gerçekten okuyacağı dosyalarla karşılaştırır — tüm kod tabanıyla değil.",
     footer: "🧠 Graphify-in-Action · kaynak proje: finansal tahminleme platformu · detaylar: <b>docs/</b> klasöründe"
   }
 };

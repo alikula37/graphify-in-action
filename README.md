@@ -1,6 +1,6 @@
 # 🧠 graphify-in-action
 
-**A measured case study: 97.6% fewer tokens by querying a knowledge graph instead of re-reading 7,580 lines of code.**
+**A measured case study: 82–90% less context to answer a question — by querying a knowledge graph instead of re-reading the relevant source files.**
 
 > Every number here was measured on a real project (2026-08-16, `graphify 0.9.43`). No estimates, no marketing — just data. 🧪
 
@@ -19,7 +19,7 @@ graphify reads your code and draws a **map** of it — showing which files call,
 *The FastAPI codebase mapped by graphify — every node is a concept, colors are communities. (Image: graphify, Apache-2.0)*
 
 - **A map, not a pile of files.** It pre-draws "who calls whom," so relationships are already there — the agent doesn't re-derive them every time.
-- **Read the map, not every street.** One query returns a small, relevant slice (~1.7K tokens) instead of re-reading the whole codebase (~71.8K tokens).
+- **Read the map, not every street.** One query returns a small, relevant slice (**1,694 tokens**) instead of re-reading the files an agent would otherwise grep and read (~9.6K–16.8K tokens).
 - **Local, free, offline.** Built on your machine with **0 API calls** — no keys, no data leaving your computer.
 
 <img src="assets/demo-path.png" alt="graphify path query output — shortest path between two concepts, hop by hop" width="720">
@@ -32,7 +32,7 @@ graphify is open-source ([Graphify-Labs/graphify](https://github.com/Graphify-La
 
 ## TL;DR
 
-- On a 67-file / 7,580-line / 71,802-token codebase, one `graphify query` returned a **1,694-token** subgraph — **97.6% less** context.
+- One `graphify query` returned a **1,694-token** relationship map. Answering the same question without graphify means grepping and reading the relevant files — **9,636–16,842 tokens** (5.7×–10× more).
 - Extraction is **100% deterministic** (tree-sitter AST, no LLM) — **0 API calls**, fully offline.
 - The graph also **learns**: 12 saved queries → 11 useful, 1 dead-end flagged so it is never repeated.
 
@@ -40,7 +40,7 @@ graphify is open-source ([Graphify-Labs/graphify](https://github.com/Graphify-La
 
 | Metric | Value | Meaning |
 |---|---|---|
-| 📉 **Token reduction** | **97.6%** | Code 71,802 tokens → single query **1,694 tokens** (cl100k_base) |
+| 📉 **Context reduction** | **82–90%** | Same question: **1,694 tokens** (graphify) vs **9,636–16,842 tokens** (files an agent reads without graphify) |
 | ✅ **Extraction quality** | **100% extracted · 0% ambiguous** | 4/931 edges inferred (0.4%) — deterministic, no LLM |
 | 💸 **Cost** | **0 API calls · $0** | tree-sitter local parse, fully offline |
 | 🗺️ **Graph size** | **562 nodes · 931 edges · 44 communities · 599 KB** | The whole code map in one file |
@@ -53,17 +53,17 @@ The install criterion was: *"if graphify doesn't help, or worsens token/context 
 
 | Criterion | Measurement | Result |
 |---|---|---|
-| 💨 **Efficiency** | 71,802 tokens of code → **1,694 tokens** per query | **97.6% fewer tokens** |
+| 💨 **Efficiency** | 9,636–16,842 tokens (files an agent reads without graphify) → **1,694 tokens** per query | **82–90% less context** |
 | 🎯 **Error-free** | **100% extracted · 0% ambiguous**; inferred edges 0.4% (confidence 0.8) | Deterministic — no LLM, no hallucination source |
 | 💸 **Cost** | **0 API calls**, no API key required for code | Fully offline |
 | 🧠 **Learning** | 12 saved queries: **11 useful**, 1 dead-end flagged | Dead-ends aren't re-scanned |
 
-### 🔬 vs pasting the whole codebase (freetext)
+### 🔬 vs answering the same question without graphify
 
-| | Pasting the whole code | A graphify query |
+| | Without graphify (grep + read) | A graphify query |
 |---|---|---|
-| **Tokens** | **71,802 tokens** — fits a 128K window but leaves no room for instructions/analysis; `graph.json` at **167,202 tokens** does not fit at all | **1,694 tokens** — fits **~75×** in the same window |
-| **Relationships** | None — the agent must derive "who calls whom" from scratch every time | **931 edges** pre-computed, delivered by the query |
+| **Context** | **9,636–16,842 tokens** — the agent greps and reads the relevant source files to map relationships | **1,694 tokens** — relationships pre-computed, delivered as a scoped subgraph |
+| **Relationships** | Derived from scratch every session by reading files | **931 edges** pre-computed, delivered by the query |
 | **Latency / drift** | Slows down in large contexts, can drift to the wrong file | Focused subgraph → the right file, in seconds |
 
 ## 📂 What's in this repo

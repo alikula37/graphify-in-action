@@ -64,9 +64,9 @@
   istiyorsan graphify.
 
 ### 🆚 LLM'e tüm kodu yapıştırmak
-- **Graphify +:** Kodun tamamını (71.802 token) olduğu gibi vermek bağlamı doldurur ve
-  ilişkileri ajanın sıfırdan çıkarmasını gerektirir; graphify ajanı **sorgu başına
-  1.694 token** ile doğru yere yönlendirir (bkz. [`02-gercek-etki.md`](02-gercek-etki.md)).
+- **Graphify +:** Bir soruyu yanıtlamak için ilgili dosyaları okumak (bu projede
+  9.636–16.842 token) bağlamı doldurur ve ilişkileri ajanın sıfırdan çıkarmasını gerektirir;
+  graphify ajanı **sorgu başına 1.694 token** ile doğru yere yönlendirir (bkz. [`02-gercek-etki.md`](02-gercek-etki.md)).
 - **LLM full-context +:** Tek seferlik küçük projelerde basit; kurulum yok.
 - **Sonuç:** Repo büyüdükçe graphify'nin ölçek avantajı belirginleşir.
 

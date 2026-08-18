@@ -28,15 +28,16 @@
 
 | Metric | Value |
 |---|---|
-| `graphify query "forecast cone horizon ensemble"` output | **6,430 bytes · 1,694 tokens** |
-| Entire codebase | 71,802 tokens |
-| **Token reduction** | **97.6%** (1 − 1,694 / 71,802) |
-| Byte-level reduction | 97.6% (6,430 bytes / 271,540 bytes) |
-| `graph.json` (all information) | 599 KB · **167,202 tokens** · 562 nodes · 931 edges |
+| `graphify query "forecast cone horizon ensemble"` output | **6,430 bytes · 1,694 tokens** (81 nodes) |
+| Files an agent reads *without* graphify — 6 core files | **9,636 tokens** |
+| Files an agent reads *without* graphify — all 19 relevant files | **16,842 tokens** |
+| **Context reduction** | **82–90%** (1 − 1,694 / 9,636 … 1 − 1,694 / 16,842) |
+| Whole codebase (for scale only) | 67 files · 71,802 tokens |
 
-> Instead of reading all the code and deriving relationships from scratch, the agent
-> approaches each question with **~2.4% of the code** as context and resolves the rest
-> through the ready-made graph.
+> The comparison is against what the agent would **actually read** to answer the same
+> question — not the whole codebase. graphify returns the relationship map in
+> **1,694 tokens**; without it, the agent greps and reads the relevant files
+> (**9,636–16,842 tokens**, i.e. 5.7×–10× more).
 
 ### Extraction quality (real, from GRAPH_REPORT.md)
 
@@ -107,7 +108,7 @@
 
 | Where it helped | What it delivered |
 |---|---|
-| Code navigation | 7,580 lines / 71,802 tokens → 1,694 tokens per query (**97.6% reduction**) |
+| Code navigation | 9,636–16,842 tokens (files read without graphify) → 1,694 tokens per query (**82–90% reduction**) |
 | Settings dead-end | 1 dead-end flag → the same mistake was never repeated |
 | Debugging | `path`/`query` → the right file in one step |
 | Memory | 12 memories → 11 useful; the ensemble and job modules prioritized |
@@ -115,5 +116,7 @@
 | Storage | All knowledge in a 599 KB `graph.json` (+ 3.9 MB extraction folder) |
 
 > ⚠️ **Honesty note:** All numbers were measured on this project. Token counts use the
-> `cl100k_base` tokenizer; "reduction %" = 1 − (query tokens / total code tokens). The
-> actual savings depend on the agent's reading behavior; the ratio is fixed.
+> `cl100k_base` tokenizer. "Reduction %" compares the graphify query output against the
+> files the agent would actually read (grep + read) for the same question — not against the
+> whole codebase. The 6-core-file figure (9,636 tokens) is the conservative end of the range;
+> the 19-file figure (16,842 tokens) is every file the query points to.
